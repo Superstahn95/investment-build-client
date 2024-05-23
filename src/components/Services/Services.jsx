@@ -31,7 +31,7 @@ const services = [
 
 function Services() {
   return (
-    <div className="font-montserrat flex flex-col items-center py-6 mt-7">
+    <div className="font-montserrat flex flex-col items-center mt-7">
       <h3 className="text-red-400  text-xs md:text-lg">
         Welcome To MiningExchange
       </h3>
@@ -52,7 +52,7 @@ function Services() {
             header={service.header}
             description={service.description}
             icon={service.icon}
-            number={"O" + index + 1}
+            number={"O" + (index + 1)}
           />
         ))}
       </div>

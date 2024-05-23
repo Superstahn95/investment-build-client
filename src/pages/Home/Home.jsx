@@ -15,24 +15,10 @@ import Hero from "../../components/Hero/Hero";
 import Services from "../../components/Services/Services";
 import Onboarding from "../../components/Onboarding/Onboarding";
 import GotYou from "../../components/Gotyou/GotYou";
+import Statistics from "../../components/Statistics/Statistics";
+import Testimonial from "../../components/Testimonial/Testimonial";
 
 function Home() {
-  useEffect(() => {
-    axios
-      .get("/api/home")
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }, []);
-  const myRef = useRef();
-  const [isIntersecting, setIsIntersecting] = useState();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      setIsIntersecting(entry.isIntersecting);
-    });
-    observer.observe(myRef.current);
-  }, []);
   return (
     <>
       <Hero />
@@ -40,26 +26,8 @@ function Home() {
         <Services />
         <GotYou />
         <Onboarding />
-        <div className="py-5 flex justify-between   items-center container w-11/12 mx-auto my-5">
-          <div className="w-5/12">
-            <h1 className="text-5xl font-bold capitalize pb-3 text-red-400">
-              Invest with purpose
-            </h1>
-            <p className="text-3xl py-3">
-              We match strategy with your wealth goals.
-            </p>
-            <p className="text-xl py-3 leading-normal">
-              Our trading system combines proven strategy with modern technology
-              to deliver best results for investors.
-            </p>
-            <button className="text-white uppercase font-bold bg-red-400 py-3 px-4 rounded">
-              <a>Get Started</a>
-            </button>
-          </div>
-          <div className="w-6/12 ">
-            <img src={purposeImg} alt="" className="min-w-full" />
-          </div>
-        </div>
+        <Statistics />
+        <Testimonial />
         <div className="py-5  container w-11/12 mx-auto my-5">
           <h1 className="text-center text-5xl capitalize py-10 text-red-400">
             {" "}
@@ -145,10 +113,7 @@ function Home() {
           </div>
         </div>
         {/* Carry out slide in and fade in animations */}
-        <div
-          ref={myRef}
-          className="py-10 flex justify-between   items-center container w-11/12 mx-auto my-5"
-        >
+        <div className="py-10 flex justify-between   items-center container w-11/12 mx-auto my-5">
           <div className="w-5/12">
             <p className="text-3xl py-3">
               We're building a financial company with people as our fundamental
