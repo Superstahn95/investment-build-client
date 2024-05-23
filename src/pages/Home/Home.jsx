@@ -17,6 +17,8 @@ import Onboarding from "../../components/Onboarding/Onboarding";
 import GotYou from "../../components/Gotyou/GotYou";
 import Statistics from "../../components/Statistics/Statistics";
 import Testimonial from "../../components/Testimonial/Testimonial";
+import CoinTable from "../../components/CoinTable/CoinTable";
+import Sponsors from "../../components/Sponsors/Sponsors";
 
 function Home() {
   return (
@@ -28,6 +30,8 @@ function Home() {
         <Onboarding />
         <Statistics />
         <Testimonial />
+        <CoinTable />
+        <Sponsors />
         <div className="py-5  container w-11/12 mx-auto my-5">
           <h1 className="text-center text-5xl capitalize py-10 text-red-400">
             {" "}
