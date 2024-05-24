@@ -12,7 +12,7 @@ function About() {
   return (
     <>
       <Navbar />
-      <AboutHero />
+      <AboutHero title={"about"} />
       <Intro />
       <Statistics />
       <Services />
