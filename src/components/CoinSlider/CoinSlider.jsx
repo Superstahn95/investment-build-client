@@ -49,7 +49,7 @@ function CoinSlider() {
   }, []);
   if (isError || loading) return null;
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-slate-900 h-[100px] flex items-center justify-center">
+    <div className="fixed z-[99] bottom-0 left-0 right-0 bg-slate-900 h-[100px] flex items-center justify-center">
       <AliceCarousel
         mouseTracking
         items={items}
