@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import AuthTextInput from "../../components/CustomFormInputs/MyTextInput";
+import AuthTextInput from "../../components/CustomFormInputs/AuthTextInput";
 import registerImg from "/images/thumbs-up.png";
 // import { useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";

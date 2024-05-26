@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import AuthTextInput from "../../components/CustomFormInputs/MyTextInput";
+import AuthTextInput from "../../components/CustomFormInputs/AuthTextInput";
 import ladyImg from "/images/lady-sitting.png";
 import { Link, useNavigate } from "react-router-dom";
 // import { useSelector, useDispatch } from "react-redux";
