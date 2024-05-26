@@ -5,6 +5,8 @@ import About from "./pages/About/About";
 import Security from "./pages/Security/Security";
 import NotFound from "./pages/NotFound/NotFound";
 import Investment from "./pages/Investment/Investment";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +15,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/security" element={<Security />} />
         <Route path="/investments" element={<Investment />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

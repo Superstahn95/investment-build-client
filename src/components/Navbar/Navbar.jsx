@@ -75,10 +75,10 @@ bg-slate-900 text-white"
             </button>
           ) : (
             <NavLink
-              to="/signup"
+              to="/login"
               className="text-white bg-transparent border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
             >
-              Login/SignUp
+              Login
             </NavLink>
           )}
         </ul>

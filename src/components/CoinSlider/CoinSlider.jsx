@@ -8,12 +8,11 @@ function CoinSlider() {
   const [isError, setIsError] = useState(false);
   const responsive = {
     0: {
+      items: 3,
+    },
+    900: {
       items: 4,
     },
-    // 1024: {
-    //     items: 3,
-    //     itemsFit: 'contain',
-    // }
   };
   const getCoins = async () => {
     setLoading(true);
@@ -49,7 +48,7 @@ function CoinSlider() {
   }, []);
   if (isError || loading) return null;
   return (
-    <div className="fixed z-[99] bottom-0 left-0 right-0 bg-slate-900 h-[100px] flex items-center justify-center">
+    <div className="fixed z-[99] bottom-0 left-0 right-0 bg-slate-900 h-[70px] flex items-center justify-center">
       <AliceCarousel
         mouseTracking
         items={items}
@@ -58,7 +57,7 @@ function CoinSlider() {
         disableDotsControls
         infinite
         animationDuration={1000}
-        autoPlayInterval={3000}
+        autoPlayInterval={2000}
         responsive={responsive}
       />
     </div>
