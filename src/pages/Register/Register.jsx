@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import MyTextInput from "../../components/CustomFormInputs/MyTextInput";
+import AuthTextInput from "../../components/CustomFormInputs/MyTextInput";
 import registerImg from "/images/thumbs-up.png";
 // import { useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";
@@ -37,12 +37,12 @@ function Register() {
   //     return <Navigate to={"/dashboard"} />;
   //   }
   return (
-    <main className="min-h-screen w-full  grid grid-cols-2">
-      <div className="flex items-center  justify-center bg-slate-900">
+    <main className="min-h-screen w-full  grid md:grid-cols-2">
+      <div className="hidden md:flex items-center  justify-center bg-slate-900">
         <img src={registerImg} alt="register image" />
       </div>
-      <div className="flex items-center justify-center ">
-        <div className="w-[90%] h-[70%] px-3 rounded-md shadow-xl">
+      <div className="flex items-center h-full justify-center ">
+        <div className=" w-full sm:w-[80%]  py-4 px-3 rounded-md shadow-xl">
           <h2 className="font-montserrat text-gray-700 text-3xl font-bold py-3 text-center">
             Sign Up
           </h2>
@@ -73,25 +73,25 @@ function Register() {
             }}
           >
             <Form>
-              <MyTextInput
+              <AuthTextInput
                 label="Name"
                 name="name"
                 type="text"
                 placeholder="Enter your name"
               />
-              <MyTextInput
+              <AuthTextInput
                 label="Email"
                 name="email"
                 type="email"
                 placeholder="Enter your email"
               />
-              <MyTextInput
+              <AuthTextInput
                 label="Password"
                 name="password"
                 type="password"
                 placeholder="Enter your password"
               />
-              <MyTextInput
+              <AuthTextInput
                 label="Confirm Password"
                 name="confirmPassword"
                 type="password"

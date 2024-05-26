@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import MyTextInput from "../../components/CustomFormInputs/MyTextInput";
+import AuthTextInput from "../../components/CustomFormInputs/MyTextInput";
 import ladyImg from "/images/lady-sitting.png";
 import { Link, useNavigate } from "react-router-dom";
 // import { useSelector, useDispatch } from "react-redux";
@@ -28,12 +28,12 @@ function Login() {
     password: "",
   };
   return (
-    <main className="min-h-screen w-full  grid grid-cols-2">
-      <div className="flex items-center  justify-center bg-slate-900">
+    <main className="min-h-screen w-full  grid md:grid-cols-2">
+      <div className="items-center hidden md:flex justify-center bg-slate-900">
         <img src={ladyImg} alt="login image" />
       </div>
-      <div className="flex items-center justify-center ">
-        <div className="w-[90%] h-[70%] px-3 rounded-md shadow-xl">
+      <div className="flex  items-center h-full justify-center">
+        <div className="w-[80%]  px-3 py-4 rounded-md shadow-xl ">
           <h2 className="font-montserrat text-gray-700 text-3xl font-bold py-3 text-center">
             Sign In
           </h2>
@@ -53,13 +53,13 @@ function Login() {
             }}
           >
             <Form>
-              <MyTextInput
+              <AuthTextInput
                 label="Email"
                 name="email"
                 type="email"
                 placeholder="Enter your email"
               />
-              <MyTextInput
+              <AuthTextInput
                 label="Password"
                 name="password"
                 type="password"
