@@ -33,7 +33,7 @@ function Login() {
         <img src={ladyImg} alt="login image" />
       </div>
       <div className="flex  items-center h-full justify-center">
-        <div className="w-[80%]  px-3 py-4 rounded-md shadow-xl ">
+        <div className="w-full  sm:w-[80%]  px-3 py-4 rounded-md shadow-xl ">
           <h2 className="font-montserrat text-gray-700 text-3xl font-bold py-3 text-center">
             Sign In
           </h2>
