@@ -1,20 +1,16 @@
 import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
+import { LuLoader2 } from "react-icons/lu";
 import * as Yup from "yup";
 import AuthTextInput from "../../components/CustomFormInputs/AuthTextInput";
 import registerImg from "/images/thumbs-up.png";
-// import { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useNavigate, Navigate } from "react-router-dom";
-// import { reset, register } from "../features/auth/authSlice";
-// import { Bars } from "react-loader-spinner";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 function Register() {
-  //   const { user, isSuccess, isLoading, isError, message, isAuthenticated } =
-  //     useSelector((state) => state.auth);
-  //   const navigate = useNavigate();
-  //   const dispatch = useDispatch();
-  const isLoading = false;
+  const navigate = useNavigate();
+  const { registerUser, registerLoading, user } = useAuth();
   //   useEffect(() => {
   //     if (isError) {
   //       //i'll be handling this in a better way
@@ -25,6 +21,12 @@ function Register() {
   //     }
   //     dispatch(reset());
   //   }, [isError, isSuccess, message, user, dispatch, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+    navigate("/dashboard");
+  }, [user, navigate]);
 
   //i feel we need to dispatch the reset functionality whenever state changes
   const initialData = {
@@ -33,9 +35,7 @@ function Register() {
     password: "",
     confirmPassword: "",
   };
-  //   if (isAuthenticated) {
-  //     return <Navigate to={"/dashboard"} />;
-  //   }
+
   return (
     <main className="min-h-screen w-full  grid md:grid-cols-2">
       <div className="hidden md:flex items-center  justify-center bg-slate-900">
@@ -68,8 +68,7 @@ function Register() {
                 .required(),
             })}
             onSubmit={(values) => {
-              //   dispatch(register(values));
-              console.log(values);
+              registerUser(values);
             }}
           >
             <Form>
@@ -107,27 +106,16 @@ function Register() {
                 <button
                   type="submit"
                   className={`${
-                    isLoading ? "bg-gray-500" : "bg-red-400"
+                    registerLoading ? "bg-gray-500" : "bg-red-400"
                   }  text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer`}
-                  disabled={isLoading}
+                  disabled={registerLoading}
                 >
-                  Sign Up
+                  {registerLoading ? (
+                    <LuLoader2 className="animate-spin" />
+                  ) : (
+                    " Sign Up"
+                  )}
                 </button>
-
-                {isLoading ? (
-                  <div className="flex items-center justify-center">
-                    {/* <Bars
-                      height="30"
-                      width="100"
-                      color="#9e9e9e"
-                      ariaLabel="bars-loading"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                      visible={true}
-                    /> */}
-                    loading...
-                  </div>
-                ) : null}
               </div>
             </Form>
           </Formik>

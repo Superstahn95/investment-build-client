@@ -24,11 +24,9 @@ function CoinSlider() {
           import.meta.env.VITE_COIN_GECKO_API_KEY
         }`
       );
-      console.log(data);
       setCoins(data.slice(0, 10));
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setIsError(true);
     }

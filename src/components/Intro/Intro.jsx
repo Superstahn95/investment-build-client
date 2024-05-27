@@ -1,4 +1,5 @@
 import img from "/images/pexels-rodnae-productions-8370752.jpg";
+
 function Intro() {
   return (
     <div className="font-montserrat py-7">

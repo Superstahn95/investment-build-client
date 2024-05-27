@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import Investment from "./pages/Investment/Investment";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>

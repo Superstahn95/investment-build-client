@@ -22,6 +22,7 @@ function Statistics() {
         <div className="flex flex-col items-center ">
           <CiUser size={50} />
           <div className="py-4 flex">
+            {/* fix the bug from here */}
             <ScrollTrigger onEnter={() => setCounterOn(true)}>
               {counterOn && (
                 <h1 className="text-5xl font-bold ">

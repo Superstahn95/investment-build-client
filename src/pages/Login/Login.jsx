@@ -1,19 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useNavigate, Link } from "react-router-dom";
+import { LuLoader2 } from "react-icons/lu";
 import AuthTextInput from "../../components/CustomFormInputs/AuthTextInput";
 import ladyImg from "/images/lady-sitting.png";
-import { Link, useNavigate } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
-// import { login, reset } from "../features/auth/authSlice";
+import { useAuth } from "../../hooks/useAuth";
 import { useEffect } from "react";
 
 function Login() {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  //   const { isSuccess, isLoading, isError, user, message } = useSelector(
-  //     (state) => state.auth
-  //   );
+  const { loginUser, loginLoading, user } = useAuth();
+  const navigate = useNavigate();
   //   useEffect(() => {
   //     if (isError) {
   //       alert(message); //handle error properly
@@ -23,6 +20,11 @@ function Login() {
   //     }
   //     dispatch(reset());
   //   }, [isError, isSuccess, user, message, dispatch, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
   const initialData = {
     email: "",
     password: "",
@@ -48,8 +50,7 @@ function Login() {
               password: Yup.string().required("Required"),
             })}
             onSubmit={(values) => {
-              console.log(values);
-              //   dispatch(login(values));
+              loginUser(values);
             }}
           >
             <Form>
@@ -74,10 +75,15 @@ function Login() {
               </p>
               <div className="my-2">
                 <button
+                  disabled={loginLoading}
                   type="submit"
-                  className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer"
+                  className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer flex items-center justify-center"
                 >
-                  Sign In
+                  {loginLoading ? (
+                    <LuLoader2 className="animate-spin" />
+                  ) : (
+                    "Sign In"
+                  )}
                 </button>
               </div>
             </Form>
