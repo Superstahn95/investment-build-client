@@ -48,7 +48,7 @@ function AuthProvider({ children }) {
       //   const { token } = data.data;
       console.log(data);
       //   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      //   setUser(data.data.user); => data.user
+      setUser(data.user);
       setLoginLoading(false);
     } catch (err) {
       setLoginLoading(false);

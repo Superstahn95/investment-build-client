@@ -2,8 +2,8 @@
 import { useEffect, useState, Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { Transition } from "@headlessui/react";
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar/Topbar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import {
   HomeIcon,

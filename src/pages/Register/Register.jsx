@@ -11,16 +11,6 @@ import { useAuth } from "../../hooks/useAuth";
 function Register() {
   const navigate = useNavigate();
   const { registerUser, registerLoading, user } = useAuth();
-  //   useEffect(() => {
-  //     if (isError) {
-  //       //i'll be handling this in a better way
-  //       alert(message);
-  //     }
-  //     if (isSuccess || user) {
-  //       navigate("/dashboard", { replace: true });
-  //     }
-  //     dispatch(reset());
-  //   }, [isError, isSuccess, message, user, dispatch, navigate]);
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
@@ -28,7 +18,6 @@ function Register() {
     navigate("/dashboard");
   }, [user, navigate]);
 
-  //i feel we need to dispatch the reset functionality whenever state changes
   const initialData = {
     name: "",
     email: "",

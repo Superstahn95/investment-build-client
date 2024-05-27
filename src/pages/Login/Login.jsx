@@ -11,15 +11,6 @@ import { useEffect } from "react";
 function Login() {
   const { loginUser, loginLoading, user } = useAuth();
   const navigate = useNavigate();
-  //   useEffect(() => {
-  //     if (isError) {
-  //       alert(message); //handle error properly
-  //     }
-  //     if (isSuccess || user) {
-  //       navigate("/dashboard");
-  //     }
-  //     dispatch(reset());
-  //   }, [isError, isSuccess, user, message, dispatch, navigate]);
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
