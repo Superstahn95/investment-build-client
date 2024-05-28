@@ -27,7 +27,8 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      setUser(data.data);
+      axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      setUser(data.user);
       setRegisterLoading(false);
     } catch (err) {
       setError(err.response.data.message);
@@ -45,9 +46,7 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      //   const { token } = data.data;
-      console.log(data);
-      //   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
       setUser(data.user);
       setLoginLoading(false);
     } catch (err) {
@@ -63,8 +62,8 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      axios.defaults.headers.common.Authorization = data.data.token;
-      setUser(data.data.user);
+      axios.defaults.headers.common.Authorization = data.token;
+      setUser(data.user);
     } catch (error) {
       console.log(error);
     }

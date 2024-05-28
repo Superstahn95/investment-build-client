@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "./Routes/PrivateRoute";
 import { useAuth } from "./hooks/useAuth";
 import ClientLayout from "./Layout/ClientLayout";
+import Deposit from "./pages/ClientPages/Deposit/Deposit";
 
 function App() {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="deposit" element={<Deposit />} />
           </Route>
         </Route>
         {/* <Route path="/dashboard" element={<AdminLayout />}>
