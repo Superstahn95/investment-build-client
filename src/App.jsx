@@ -11,9 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminLayout from "./Layout/AdminLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "./Routes/PrivateRoute";
+import AdminRoute from "./Routes/AdminRoute";
 import { useAuth } from "./hooks/useAuth";
 import ClientLayout from "./Layout/ClientLayout";
 import Deposit from "./pages/ClientPages/Deposit/Deposit";
+import Users from "./pages/AdminPages/Users/Users";
 
 function App() {
   const { user } = useAuth();
@@ -36,6 +38,9 @@ function App() {
           >
             <Route index element={<Dashboard />} />
             <Route path="deposit" element={<Deposit />} />
+            <Route element={<AdminRoute />}>
+              <Route path="users" element={<Users />} />
+            </Route>
           </Route>
         </Route>
         {/* <Route path="/dashboard" element={<AdminLayout />}>
