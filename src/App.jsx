@@ -16,6 +16,7 @@ import { useAuth } from "./hooks/useAuth";
 import ClientLayout from "./Layout/ClientLayout";
 import Deposit from "./pages/ClientPages/Deposit/Deposit";
 import Users from "./pages/AdminPages/Users/Users";
+import User from "./pages/AdminPages/User/User";
 
 function App() {
   const { user } = useAuth();
@@ -40,6 +41,7 @@ function App() {
             <Route path="deposit" element={<Deposit />} />
             <Route element={<AdminRoute />}>
               <Route path="users" element={<Users />} />
+              <Route path="users/:id" element={<User />} />
             </Route>
           </Route>
         </Route>
