@@ -3,7 +3,7 @@ import axios from "axios";
 import PlanSelection from "../../../components/PlanSelection/PlanSelection";
 import PlanDetails from "../../../components/PlanDetails/PlanDetails";
 import toastifyConfig from "../../../utils/toastify";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function Invest() {
   const [plan, setPlan] = useState("");
