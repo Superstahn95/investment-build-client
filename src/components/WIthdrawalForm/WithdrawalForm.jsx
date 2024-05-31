@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import MyTextInput from "../CustomFormInputs/MyTextInput";
 import { LuLoader2 } from "react-icons/lu";
+import toastifyConfig from "../../utils/toastify";
 function WithdrawalForm({ network }) {
+  const [loading, setLoading] = useState(false);
   const initialDetails = {
     amount: "",
     address: "",
@@ -12,13 +17,30 @@ function WithdrawalForm({ network }) {
     amount: Yup.number().required("Required"),
     address: Yup.string().required("Required"),
   });
-  const loading = false;
+  const handleWithdrawalRequest = async (details) => {
+    setLoading(true);
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.GENERAL_API_ENDPOINT}withdrawal`,
+        details,
+        {
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message, toastifyConfig);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Formik
       initialValues={initialDetails}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        console.log(values);
+        handleWithdrawalRequest(values);
       }}
     >
       <Form>
@@ -31,7 +53,7 @@ function WithdrawalForm({ network }) {
         <MyTextInput
           label={`Enter ${network} wallet address`}
           name="address"
-          type="number"
+          type="text"
           placeholder="Wallet address"
         />
         <div className="my-2">
@@ -44,6 +66,7 @@ function WithdrawalForm({ network }) {
           </button>
         </div>
       </Form>
+      <ToastContainer />
     </Formik>
   );
 }

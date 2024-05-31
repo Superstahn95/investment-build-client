@@ -18,7 +18,6 @@ function Withdrawal() {
           </div>
           {/* select network div */}
           <div className="mt-5 bg-green">
-            <p>Select Withdrawal network</p>
             <select onChange={(e) => setNetwork(e.target.value)} name="" id="">
               <option value="">Select preferred network</option>
               {withdrawalNetworks.map((network) => (
@@ -29,7 +28,7 @@ function Withdrawal() {
             </select>
           </div>
           {/* form */}
-          <WithdrawalForm />
+          <WithdrawalForm network={network} />
         </div>
         {/* instruction */}
         <WithdrawalInstruction network={network} />
