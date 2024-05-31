@@ -32,3 +32,5 @@ export const paymentMethods = [
     network: "trc20",
   },
 ];
+
+export const withdrawalNetworks = ["bitcoin", "erc20", "bep20", "trc20"];

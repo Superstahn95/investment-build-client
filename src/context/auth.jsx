@@ -51,6 +51,7 @@ function AuthProvider({ children }) {
       setLoginLoading(false);
     } catch (err) {
       setLoginLoading(false);
+      console.log(err);
       setError(err.response.data.message);
     }
   }, []);
