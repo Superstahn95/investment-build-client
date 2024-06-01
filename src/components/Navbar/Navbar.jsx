@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { LuLoader2 } from "react-icons/lu";
+// import { LuLoader2 } from "react-icons/lu";
 import { FaBitcoin } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
+import NotificationPopup from "../NotificationPopup/NotificationPopup";
 
 function Navbar() {
   const [isOpen, setisOpen] = useState(false);
@@ -83,6 +84,7 @@ bg-slate-900 text-white"
           )}
         </ul>
       </div>
+      <NotificationPopup />
       {/* </Container> */}
     </div>
   );

@@ -4,21 +4,23 @@ import { createContext, useState, useEffect } from "react";
 export const NotificationContext = createContext();
 
 const NotificationProvider = ({ children }) => {
-  const [notification, setNotification] = useState(null);
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Simulate fetching data and displaying notification
-      const user = "John"; // Fetch user's name
-      const amount = Math.floor(Math.random() * 1000); // Random amount earned
-      setNotification({ user, amount });
-    }, 15000);
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 7000); // notification stays for 7 secons
+    }, 15000); // repeats every 15 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <NotificationContext.Provider value={{ notification, setNotification }}>
+    <NotificationContext.Provider
+      value={{ showNotification, setShowNotification }}
+    >
       {children}
     </NotificationContext.Provider>
   );
