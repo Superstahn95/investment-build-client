@@ -24,6 +24,7 @@ import UpdatePlan from "./pages/AdminPages/UpdatePlan/UpdatePlan";
 import Plans from "./pages/AdminPages/Plans/Plans";
 import Deposits from "./pages/AdminPages/Deposits/Deposits";
 import Withdrawal from "./pages/ClientPages/Withdrawal/Withdrawal";
+import Withdrawals from "./pages/AdminPages/Withdrawals/Withdrawals";
 
 function App() {
   const { user } = useAuth();
@@ -53,6 +54,7 @@ function App() {
               <Route path="users" element={<Users />} />
               <Route path="users/:id" element={<User />} />
               <Route path="deposits" element={<Deposits />} />
+              <Route path="withdrawals" element={<Withdrawals />} />
               <Route path="plans" element={<Plans />} />
               <Route path="plans/create-plan" element={<CreatePlan />} />
               <Route path="plans/:id" element={<UpdatePlan />} />

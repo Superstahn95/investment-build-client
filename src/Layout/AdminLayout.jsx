@@ -8,6 +8,7 @@ import {
   HomeIcon,
   UserIcon,
   ArrowDownTrayIcon,
+  ArrowUpTrayIcon,
   CircleStackIcon,
 } from "@heroicons/react/24/solid";
 import { useAuth } from "../hooks/useAuth";
@@ -32,6 +33,11 @@ const adminLinks = [
     link: "Investments",
     icon: <CircleStackIcon className="h-5 w-5" />,
     to: "plans",
+  },
+  {
+    link: "Manage Withdrawals",
+    icon: <ArrowUpTrayIcon className="h-5 w-5" />,
+    to: "withdrawals",
   },
 ];
 

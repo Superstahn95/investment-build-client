@@ -13,15 +13,11 @@ function WithdrawalForm({ network }) {
     amount: "",
     address: "",
   };
-  const validationSchema = Yup.object({
-    amount: Yup.number().required("Required"),
-    address: Yup.string().required("Required"),
-  });
   const handleWithdrawalRequest = async (details) => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        `${import.meta.env.GENERAL_API_ENDPOINT}withdrawal`,
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal`,
         details,
         {
           withCredentials: true,
@@ -36,38 +32,43 @@ function WithdrawalForm({ network }) {
     }
   };
   return (
-    <Formik
-      initialValues={initialDetails}
-      validationSchema={validationSchema}
-      onSubmit={(values) => {
-        handleWithdrawalRequest(values);
-      }}
-    >
-      <Form>
-        <MyTextInput
-          label="Amount to withdraw"
-          name="amount"
-          type="number"
-          placeholder="Enter the amount you wish to withdraw"
-        />
-        <MyTextInput
-          label={`Enter ${network} wallet address`}
-          name="address"
-          type="text"
-          placeholder="Wallet address"
-        />
-        <div className="my-2">
-          <button
-            disabled={loading}
-            type="submit"
-            className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer flex items-center justify-center"
-          >
-            {loading ? <LuLoader2 className="animate-spin" /> : "Sign In"}
-          </button>
-        </div>
-      </Form>
+    <>
+      <Formik
+        initialValues={initialDetails}
+        validationSchema={Yup.object({
+          amount: Yup.number().required("Required"),
+          address: Yup.string().required("Required"),
+        })}
+        onSubmit={(values) => {
+          handleWithdrawalRequest(values);
+        }}
+      >
+        <Form>
+          <MyTextInput
+            label="Amount to withdraw"
+            name="amount"
+            type="number"
+            placeholder="Enter the amount you wish to withdraw"
+          />
+          <MyTextInput
+            label={`Enter ${network} wallet address`}
+            name="address"
+            type="text"
+            placeholder="Wallet address"
+          />
+          <div className="my-2">
+            <button
+              disabled={loading}
+              type="submit"
+              className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer flex items-center justify-center"
+            >
+              {loading ? <LuLoader2 className="animate-spin" /> : "Sign In"}
+            </button>
+          </div>
+        </Form>
+      </Formik>
       <ToastContainer />
-    </Formik>
+    </>
   );
 }
 
