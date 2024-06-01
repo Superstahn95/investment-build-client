@@ -1,14 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { EyeIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
 import Table from "../../../components/Table/Table";
 import toastifyConfig from "../../../utils/toastify";
+import WithdrawalDetailsModal from "../../../components/WithdrawalDetailsModal/WithdrawalDetailsModal";
 
 function Withdrawals() {
   const [loading, setLoading] = useState(false);
   const [withdrawals, setWithdrawals] = useState(null);
   const [error, setError] = useState(false);
+  //   const [showModal, setShowModal] = useState(false)
+  const [modalDetails, setModalDetails] = useState(null);
 
   const getWidthdrawals = useCallback(async () => {
     setLoading(true);
@@ -43,7 +46,9 @@ function Withdrawals() {
       toast.error(error.response.data.message, toastifyConfig);
     }
   };
-
+  const handleModal = (details) => {
+    setModalDetails(details);
+  };
   const columns = [
     { name: "Name", selector: (row) => row.user.name },
     { name: "Address", selector: (row) => row.address },
@@ -77,8 +82,11 @@ function Withdrawals() {
           >
             {row.isPaid ? "Paid" : "Click as paid"}
           </button>
-          <button className="bg-red-500 text-white px-3 py-2 rounded-md">
-            <TrashIcon className="h-4 w-4 text-white" />
+          <button
+            onClick={() => handleModal(row)}
+            className="bg-red-500 text-white px-3 py-2 rounded-md"
+          >
+            <EyeIcon className="h-4 w-4 text-white" />
           </button>
         </div>
       ),
@@ -111,6 +119,13 @@ function Withdrawals() {
       ) : (
         <p>No user data available</p>
       )}
+      {modalDetails && (
+        <WithdrawalDetailsModal
+          setShowModal={setModalDetails}
+          details={modalDetails}
+        />
+      )}
+
       <ToastContainer />
     </>
   );

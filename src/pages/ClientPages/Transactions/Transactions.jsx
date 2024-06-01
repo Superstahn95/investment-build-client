@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Tab, TabGroup, TabPanel, TabList, TabPanels } from "@headlessui/react";
 import axios from "axios";
 import ClientDepositTable from "../../../components/ClientDepositTable/ClientDepositTable";
-// import ClientWithdrawalTable from "../../components/Client/ClientWithdrawalTable";
+import ClientWithdrawalTable from "../../../components/ClientWithdrawalTable/ClientWithdrawalTable";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -63,7 +63,7 @@ function Transactions() {
                     "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-gray-700 dark:text-white",
                     "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                     selected
-                      ? "bg-red-100  shadow text-gray-700 dark:text-white"
+                      ? "bg-red-400  shadow text-gray-700 dark:text-white"
                       : " hover:bg-white/[0.12] hover:text-white"
                   )
                 }
@@ -80,7 +80,9 @@ function Transactions() {
                   />
                 )}
               </TabPanel>
-              <TabPanel>Withdrawal table</TabPanel>
+              <TabPanel>
+                <ClientWithdrawalTable />
+              </TabPanel>
             </TabPanels>
           </TabGroup>
         </div>
