@@ -15,12 +15,12 @@ function Register() {
     if (user) {
       navigate("/dashboard");
     }
-    navigate("/dashboard");
   }, [user, navigate]);
 
   const initialData = {
     name: "",
     email: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   };
@@ -49,6 +49,7 @@ function Register() {
                 .min(3, "Must be greaternthan 3 characters")
                 .required("Required"),
               email: Yup.string().required("Required"),
+              phoneNumber: Yup.string().required("Required"),
               password: Yup.string()
                 .min(6, "Password must be greater than 6 characters")
                 .required("Required"),
@@ -74,6 +75,12 @@ function Register() {
                 placeholder="Enter your email"
               />
               <AuthTextInput
+                label="Phone Number"
+                name="phoneNumber"
+                type="text"
+                placeholder="Enter your phone number"
+              />
+              <AuthTextInput
                 label="Password"
                 name="password"
                 type="password"
@@ -87,7 +94,7 @@ function Register() {
               />
               <p className="text-xs text-gray-700 font-montserrat">
                 Already have an account?{" "}
-                <Link to={"/login"} className="text-red-400">
+                <Link to="/login" className="text-red-400">
                   Sign in
                 </Link>
               </p>

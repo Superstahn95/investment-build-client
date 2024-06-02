@@ -25,6 +25,7 @@ import Plans from "./pages/AdminPages/Plans/Plans";
 import Deposits from "./pages/AdminPages/Deposits/Deposits";
 import Withdrawal from "./pages/ClientPages/Withdrawal/Withdrawal";
 import Withdrawals from "./pages/AdminPages/Withdrawals/Withdrawals";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const { user } = useAuth();
@@ -50,6 +51,7 @@ function App() {
             <Route path="buy-plan" element={<Invest />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="withdrawal" element={<Withdrawal />} />
+            <Route path="profile" element={<Profile />} />
             <Route element={<AdminRoute />}>
               <Route path="users" element={<Users />} />
               <Route path="users/:id" element={<User />} />
