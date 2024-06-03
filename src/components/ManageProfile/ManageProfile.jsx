@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
+import { LuLoader2 } from "react-icons/lu";
 
-function ManageProfile({ user, handleSubmit }) {
+function ManageProfile({ user, handleSubmit, loading }) {
   const [userDetails, setUserDetails] = useState({
     name: user?.name,
     email: user?.email,
@@ -60,10 +61,11 @@ function ManageProfile({ user, handleSubmit }) {
         {/* save change button */}
         <div className="mb-3">
           <button
+            disabled={loading}
             type="submit"
             className="bg-red-400 text-white px-3 py-2 rounded-md"
           >
-            Save Changes
+            {loading ? <LuLoader2 className="animate-spin" /> : "Save Changes"}
           </button>
         </div>
       </form>

@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import toastifyConfig from "../../utils/toastify";
+import { LuLoader2 } from "react-icons/lu";
 
-function ChangePasswordModal({ setShowPasswordModal, handleSubmit }) {
+function ChangePasswordModal({ setShowPasswordModal, handleSubmit, loading }) {
   const [passwordDetails, setPasswordDetails] = useState({
     oldPassword: "",
     newPassword: "",
@@ -22,7 +21,8 @@ function ChangePasswordModal({ setShowPasswordModal, handleSubmit }) {
     e.preventDefault();
     for (const key in passwordDetails) {
       if (passwordDetails[key] === "") {
-        toast.error("Fill all fields", toastifyConfig);
+        // toast.error("Fill all fields", toastifyConfig);
+        // throw error
         return;
       }
     }
@@ -36,12 +36,13 @@ function ChangePasswordModal({ setShowPasswordModal, handleSubmit }) {
           <h2 className="text-gray-700 dark:text-white text-xl pb-2 font-bold ">
             Change Password
           </h2>
-          <div
+          <button
+            disabled={loading}
             onClick={() => setShowPasswordModal(false)}
             className="h-8 w-8 rounded-full flex items-center justify-center border cursor-pointer border-gray-700 "
           >
             <XMarkIcon className="h-5 w-5 text-gray-700 dark:text-white" />
-          </div>
+          </button>
         </div>
         {/* file upload field */}
         <form onSubmit={changePassword}>
@@ -81,6 +82,7 @@ function ChangePasswordModal({ setShowPasswordModal, handleSubmit }) {
           <div className="">
             <div className="ml-auto w-fit space-x-3">
               <button
+                disabled={loading}
                 role="button"
                 onClick={() => setShowPasswordModal(false)}
                 className="bg-red-500 text-white px-3 py-2 rounded-md"
@@ -88,16 +90,20 @@ function ChangePasswordModal({ setShowPasswordModal, handleSubmit }) {
                 Close
               </button>
               <button
+                disabled={loading}
                 type="submit"
                 className="bg-green-700 text-white px-3 py-2 rounded-md"
               >
-                Change Password
+                {loading ? (
+                  <LuLoader2 className="animate-spin" />
+                ) : (
+                  "Change Password"
+                )}
               </button>
             </div>
           </div>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 }

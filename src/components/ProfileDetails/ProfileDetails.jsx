@@ -39,6 +39,13 @@ function ProfileDetails({ user, setShowImageModal }) {
         </span>
         <p className="text-black/80 dark:text-white ">{user?.name}</p>
       </div>
+      {/* profile number */}
+      <div className="border-b py-3 space-y-3">
+        <span className="text-sm text-black dark:text-white  font-semibold">
+          Name
+        </span>
+        <p className="text-black/80 dark:text-white ">{user?.phoneNumber}</p>
+      </div>
       {/* profile email*/}
       <div className="border-b py-3 space-y-3">
         <span className="text-sm text-black dark:text-white  font-semibold">

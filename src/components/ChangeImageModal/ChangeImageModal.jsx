@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { toast, ToastContainer } from "react-toastify";
+import { LuLoader2 } from "react-icons/lu";
 import { useState } from "react";
 import toastifyConfig from "../../utils/toastify";
 
-function ChangeImageModal({ setShowImageModal, handleSubmit }) {
+function ChangeImageModal({ setShowImageModal, handleSubmit, loading }) {
   const [image, setImage] = useState(null);
-  const isLoading = false;
   const uploadImage = (e) => {
     e.preventDefault();
     if (!image) {
@@ -26,12 +26,13 @@ function ChangeImageModal({ setShowImageModal, handleSubmit }) {
           <h2 className="text-gray-700 dark:text-white text-xl pb-2 font-bold ">
             Change Profile Picture
           </h2>
-          <div
+          <button
+            disabled={loading}
             onClick={() => setShowImageModal(false)}
             className="h-8 w-8 rounded-full flex items-center justify-center border cursor-pointer border-gray-700 "
           >
             <XMarkIcon className="h-5 w-5 text-gray-700 dark:text-white" />
-          </div>
+          </button>
         </div>
         {/* file upload field */}
         <form encType="multipart/form-data" onSubmit={(e) => uploadImage(e)}>
@@ -46,7 +47,7 @@ function ChangeImageModal({ setShowImageModal, handleSubmit }) {
           <div className="">
             <div className="ml-auto w-fit space-x-3">
               <button
-                disabled={isLoading}
+                disabled={loading}
                 role="button"
                 onClick={() => setShowImageModal(false)}
                 className="bg-red-500 text-white px-3 py-2 rounded-md"
@@ -54,11 +55,11 @@ function ChangeImageModal({ setShowImageModal, handleSubmit }) {
                 Close
               </button>
               <button
-                disabled={isLoading}
+                disabled={loading}
                 type="submit"
                 className="bg-green-700 text-white px-3 py-2 rounded-md"
               >
-                {isLoading ? "Uploading...." : "Change"}
+                {loading ? <LuLoader2 className="animate-spin" /> : "Upload"}
               </button>
             </div>
           </div>
