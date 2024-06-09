@@ -7,14 +7,19 @@ import { ToastContainer, toast } from "react-toastify";
 import MyTextInput from "../CustomFormInputs/MyTextInput";
 import { LuLoader2 } from "react-icons/lu";
 import toastifyConfig from "../../utils/toastify";
+import { useAuth } from "../../hooks/useAuth";
 function WithdrawalForm({ network }) {
   const [loading, setLoading] = useState(false);
+  const { user, setUser } = useAuth();
   const initialDetails = {
     amount: "",
     address: "",
   };
   const handleWithdrawalRequest = async (details) => {
     setLoading(true);
+    if (details.amount > user?.withdrawableFunds) {
+      return toast.error("Amount entered is greater than withdrawable balance");
+    }
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal`,
@@ -23,6 +28,11 @@ function WithdrawalForm({ network }) {
           withCredentials: true,
         }
       );
+      setUser((prev) => ({
+        ...prev,
+        withdrawableFunds:
+          prev.withdrawableFunds - parseInt(data.amountRequested),
+      }));
       toast.success(data.message, toastifyConfig);
     } catch (error) {
       console.log(error);
@@ -62,12 +72,12 @@ function WithdrawalForm({ network }) {
               type="submit"
               className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer flex items-center justify-center"
             >
-              {loading ? <LuLoader2 className="animate-spin" /> : "Sign In"}
+              {loading ? <LuLoader2 className="animate-spin" /> : "Withdraw"}
             </button>
           </div>
         </Form>
       </Formik>
-      <ToastContainer />
+      <ToastContainer containerId={"withdrawalRequest"} />
     </>
   );
 }

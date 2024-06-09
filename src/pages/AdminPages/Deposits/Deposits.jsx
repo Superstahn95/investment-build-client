@@ -99,6 +99,7 @@ function Deposits() {
           setShowImage={setShowImage}
           id={showImage}
           allDeposits={deposits}
+          setDeposits={setDeposits}
         />
       )}
     </>

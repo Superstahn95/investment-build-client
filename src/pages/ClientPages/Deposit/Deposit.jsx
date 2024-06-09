@@ -8,6 +8,7 @@ import WalletDetails from "../../../components/WalletDetails/WalletDetails";
 // import { makeDeposit, reset } from "../../features/deposits/depositSlice";
 import { ToastContainer, toast } from "react-toastify";
 import toastifyConfig from "../../../utils/toastify";
+import { useAuth } from "../../../hooks/useAuth";
 
 function Deposit() {
   const [amount, setAmount] = useState(null);
@@ -15,7 +16,7 @@ function Deposit() {
   const [selected, setSelected] = useState(paymentMethods[0]);
   const [loading, setLoading] = useState(false);
   const [showWalletDetails, setShowWalletDetails] = useState(false);
-
+  const { user } = useAuth();
   const handleDeposit = async () => {
     setLoading(true);
     const formData = new FormData();
@@ -28,7 +29,12 @@ function Deposit() {
         { withCredentials: true }
       );
       setShowWalletDetails(false);
+      //pendingDeposit totalDeposit
       toast.success(data.message, toastifyConfig);
+      setUser((prev) => ({
+        ...prev,
+        pendingDeposit: parseInt(data.amountDeposited) + prev.pendingDeposit,
+      }));
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message || "error", toastifyConfig);
@@ -72,9 +78,9 @@ function Deposit() {
         <div className=" col-span-4 md:col-span-1  mt-5 text-gray-700  dark:text-white">
           <div className="border border-gray-500 dark:border-white rounded-md">
             <div className="flex  border-b border-gray-500 dark:border-white p-4">
-              <p className="flex-1 font-semibold">Total deposit</p>
+              <p className="flex-1 font-semibold">Pending Deposits</p>
               <div className="flex-1">
-                <p className="font-semibold ">$0.00</p>
+                <p className="font-semibold ">${user?.pendingDeposit}</p>
                 <span className="text-sm text-gray-500">Amount</span>
               </div>
             </div>
@@ -87,7 +93,7 @@ function Deposit() {
         </div>
       </div>
       {/* {depositIsLoading && <OverlayLoaderComponent />} */}
-      <ToastContainer />
+      <ToastContainer containerId="depositRequest" />
     </>
   );
 }

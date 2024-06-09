@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 function PlanSelection({
   plans,
-  plan,
   setPlan,
   investmentAmount,
   setInvestmentAmount,
@@ -10,16 +9,19 @@ function PlanSelection({
   const handleClick = (number) => {
     setInvestmentAmount(number);
   };
+  const handlePlanSelection = (id) => {
+    const selectedPlan = plans.filter((c) => c._id === id)[0];
+    setPlan(selectedPlan);
+  };
   return (
-    <div className="col-span-4 md:col-span-3 p-3">
+    <div className="col-span-4 xl:col-span-3 p-3">
       {/* seek to replace with formik later */}
       <form className="border border-gray-500 dark:border-white rounded-md p-4">
         <div className="mb-7">
           {/* value of this is going to be the id of the plan bcecause that is what we will be sending to the backend */}
           <select
             name="plan"
-            value={plan}
-            onChange={(e) => setPlan(e.target.value)}
+            onChange={(e) => handlePlanSelection(e.target.value)}
           >
             {plans.map((plan) => (
               <option key={plan._id} value={plan._id}>
@@ -30,14 +32,14 @@ function PlanSelection({
         </div>
         <div className="mt-14">
           <p className="dark:text-white">Choose Quick Amount to Invest</p>
-          <div className="my-2 flex items-center space-x-4">
+          <div className="my-2 flex flex-wrap items-center ">
             {quickAmounts.map((amount) => (
               <div
                 onClick={() => handleClick(amount)}
                 key={amount}
                 className={`${
                   amount === investmentAmount ? "bg-red-400" : "bg-slate-200"
-                } flex items-center justify-center px-4 py-3 rounded-md cursor-pointer`}
+                } flex items-center min-w-[100px] justify-center px-4 py-3 rounded-md cursor-pointer mr-4 mt-2`}
               >
                 ${amount}
               </div>

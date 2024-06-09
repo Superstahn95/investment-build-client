@@ -9,6 +9,8 @@ import {
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/solid";
 import { useAuth } from "../../hooks/useAuth";
+import UserCurrentPlans from "../UserCurrentPlans/UserCurrentPlans";
+import UserTransactions from "../UserTransactions/UserTransactions";
 
 function ClientDashboardHome() {
   //   const { user, isSuccess, isLoading, isError, message } = useSelector(
@@ -24,7 +26,7 @@ function ClientDashboardHome() {
     },
     {
       title: "Total Profit",
-      amount: 0,
+      amount: user?.totalProfit,
       icon: <BanknotesIcon className="text-white h-10 w-10" />,
       iconBgColor: "bg-green-400",
     },
@@ -36,7 +38,7 @@ function ClientDashboardHome() {
     },
     {
       title: "Total Withdrawal",
-      amount: 0,
+      amount: user?.totalWithdrawal,
       icon: <ArrowUpIcon className="text-white h-10 w-10" />,
       iconBgColor: "bg-yellow-400",
     },
@@ -56,11 +58,11 @@ function ClientDashboardHome() {
   return (
     <>
       {/* this user should be replaced with the name of the logged in user */}
-      <h1 className="text-gray-700 text-3xl mb-16 font-bold dark:text-white">
+      <h1 className="text-gray-700 text-2xl md:text-3xl mb-16 font-bold dark:text-white font-montserrat">
         {/* was user before */}
         Welcome {user?.name}
       </h1>
-      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white">
+      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white font-montserrat">
         Account Summary
       </h2>
       <div className="grid lg:grid-cols-3 gap-5 mb-16">
@@ -75,40 +77,27 @@ function ClientDashboardHome() {
           />
         ))}
       </div>
-      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white">
+      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white font-montserrat">
         Active Plans
       </h2>
       {/* Existing plan div */}
-      <div className="grid  bg-white h-64 shadow-sm dark:bg-slate-800  mb-16">
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <p className="dark:text-white">
-            You do not have an active investment plan
-          </p>
-          <Link className="bg-orange-500 text-white font-bold px-3 py-2 rounded-md ">
-            Buy a plan
-          </Link>
-        </div>
-      </div>
-      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white">
-        Recent Transactions(0)
+      <UserCurrentPlans />
+
+      <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white font-montserrat">
+        Recent Transactions
       </h2>
       {/* transactions table to be dynamically rendered when i incorporate my backend */}
       <div className="grid col-1 bg-white h-64 shadow-sm dark:bg-slate-800  p-4">
         <div className="flex flex-col">
-          <Link className="self-end dark:text-orange-500 uppercase text-lg flex items-center space-x-2">
-            <ArrowTopRightOnSquareIcon className="h-4 w-4 text-gray-700 dark:text-orange-500 " />
+          <Link
+            to="transactions"
+            className="self-end text-red-400 uppercase text-lg flex items-center space-x-2"
+          >
+            <ArrowTopRightOnSquareIcon className="h-4 w-4 text-red-400 " />
             View all transactions
           </Link>
-          <table className="dark:text-white  rounded-md text-gray-500">
-            <thead className="bg-gray-200 dark:bg-slate-900">
-              <tr>
-                <th className="p-2">Date</th>
-                <th>Type</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>No records yet</tbody>
-          </table>
+          {/* user transaction table */}
+          <UserTransactions />
         </div>
       </div>
     </>

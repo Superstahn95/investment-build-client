@@ -133,7 +133,7 @@ function User() {
           username={user?.username}
         />
       </div>
-      {showModal && <FundingModal closeModal={closeModal} />}
+      {showModal && <FundingModal closeModal={closeModal} id={user?._id} />}
     </>
   );
 }

@@ -40,8 +40,8 @@ function Transactions() {
       <h1 className="text-gray-700 text-3xl mb-16 font-bold dark:text-white font-montserrat">
         Transaction Records
       </h1>
-      <div className="grid  bg-white min-h-[256px] shadow-sm dark:bg-slate-800  mb-16">
-        <div className="w-full    px-2 py-16 sm:px-0">
+      <div className="grid   bg-white min-h-[256px] shadow-sm dark:bg-slate-800  mb-16">
+        <div className="px-2  w-full overflow-x-scroll py-16 sm:px-0">
           <TabGroup>
             <TabList className="flex space-x-4 rounded-xl bg-blue-900/20 p-1">
               <Tab

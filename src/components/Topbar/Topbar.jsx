@@ -8,6 +8,7 @@ import {
   SunIcon,
   MoonIcon,
 } from "@heroicons/react/24/solid";
+import { LuLoader2 } from "react-icons/lu";
 import {
   Menu,
   MenuItems,
@@ -21,10 +22,10 @@ import { useAuth } from "../../hooks/useAuth";
 
 function TopBar({ showNav, setShowNav }) {
   const { setTheme } = useTheme();
-  const { user } = useAuth();
-  const handleLogout = () => {
-    console.log("log out user");
-  };
+  const { user, logoutLoading, logout } = useAuth();
+  const altImage =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+
   return (
     <div
       className={`fixed bg-gray-200 dark:bg-slate-900  w-full h-16 flex justify-between items-center transition-all duruation-[400ms] ${
@@ -50,7 +51,7 @@ function TopBar({ showNav, setShowNav }) {
               <MenuButton className="inline-flex w-full justify-center items-center">
                 <div>
                   <img
-                    src="https://images.pexels.com/photos/17392773/pexels-photo-17392773/free-photo-of-fer-vintage.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
+                    src={user?.profilePhoto ? user?.profilePhoto.url : altImage}
                     className="w-8 h-8 rounded-full md:mr-4 border-2 border-white shadow-sm"
                     alt=""
                   />
@@ -74,21 +75,28 @@ function TopBar({ showNav, setShowNav }) {
                 <div className="p-1">
                   <MenuItem>
                     <Link
-                      href="#"
-                      className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                      to="profile"
+                      className="flex hover:bg-red-400 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                     >
                       <UserIcon className="h-4 w-4 mr-2" />
                       Profile
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link
-                      onClick={handleLogout}
-                      className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                    <button
+                      onClick={logout}
+                      className="flex w-full hover:bg-red-400 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                     >
-                      <CreditCardIcon className="h-4 w-4 mr-2" />
-                      Logout
-                    </Link>
+                      {logoutLoading ? (
+                        <LuLoader2 className="animate-spin" />
+                      ) : (
+                        <div className="w-full flex items-center justify-start">
+                          {" "}
+                          <CreditCardIcon className="h-4 w-4 mr-2" />
+                          Logout
+                        </div>
+                      )}
+                    </button>
                   </MenuItem>
                 </div>
               </MenuItems>

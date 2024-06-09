@@ -17,6 +17,7 @@ function AuthProvider({ children }) {
   const [loginLoading, setLoginLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
   const [logoutLoading, setLogoutLoading] = useState(false);
+  const [appLoading, setAppLoading] = useState(false);
   const registerUser = useCallback(async (userDetails) => {
     setRegisterLoading(true);
     try {
@@ -56,9 +57,10 @@ function AuthProvider({ children }) {
     }
   }, []);
   const refetchUserOnRefresh = useCallback(async () => {
+    setAppLoading(true);
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}auth/refetch`,
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}auth/refreshToken`,
         {
           withCredentials: true,
         }
@@ -67,6 +69,9 @@ function AuthProvider({ children }) {
       setUser(data.user);
     } catch (error) {
       console.log(error);
+      setError(error.response.data.message);
+    } finally {
+      setAppLoading(false);
     }
   }, []);
   const logout = useCallback(async () => {
@@ -74,11 +79,12 @@ function AuthProvider({ children }) {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}auth/logout`,
+        {},
         {
           withCredentials: true,
         }
       );
-      console.log(data.data);
+      console.log(data.message);
       setUser(null);
       setLogoutLoading(false);
     } catch (error) {
@@ -94,6 +100,7 @@ function AuthProvider({ children }) {
       loginLoading,
       registerLoading,
       logoutLoading,
+      appLoading,
       setError,
       setUser,
       loginUser,
@@ -107,6 +114,7 @@ function AuthProvider({ children }) {
       loginLoading,
       registerLoading,
       logoutLoading,
+      appLoading,
       setUser,
       setError,
       loginUser,

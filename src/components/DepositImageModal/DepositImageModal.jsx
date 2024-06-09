@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import toastifyConfig from "../../utils/toastify";
 
-function DepositImageModal({ id, setShowImage, allDeposits }) {
+function DepositImageModal({ id, setShowImage, allDeposits, setDeposits }) {
   const [loading, setLoading] = useState(false);
   const [details, setDetails] = useState(null);
   const handleDepositApproval = async () => {
@@ -13,15 +13,23 @@ function DepositImageModal({ id, setShowImage, allDeposits }) {
     // approve deposit logic
     try {
       const { data } = await axios.patch(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}`,
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}deposit`,
         { id },
         {
           withCredentials: true,
         }
       );
+      setDeposits((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, approved: true } : item
+        )
+      );
       toast.success(data.message, toastifyConfig);
+      setShowImage(null);
     } catch (error) {
       toast.error(error.response.data.message, toastifyConfig);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,11 +38,15 @@ function DepositImageModal({ id, setShowImage, allDeposits }) {
     // decline deposit logic
     try {
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}decline/${id}`
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}deposit/decline/${id}`
       );
       toast.success(data.message, toastifyConfig);
+      setDeposits((prev) => prev.filter((item) => item._id !== id));
+      setShowImage(null);
     } catch (error) {
       toast.error(error.response.data.message, toastifyConfig);
+    } finally {
+      setLoading(false);
     }
   };
   const handleDepositDelete = async () => {
@@ -42,11 +54,15 @@ function DepositImageModal({ id, setShowImage, allDeposits }) {
     // delete deposit logic
     try {
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}${id}`
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}deposit/${id}`
       );
       toast.success(data.message, toastifyConfig);
+      setDeposits((prev) => prev.filter((item) => item._id !== id));
+      setShowImage(null);
     } catch (error) {
       toast.error(error.response.data.message, toastifyConfig);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,8 +126,10 @@ function DepositImageModal({ id, setShowImage, allDeposits }) {
         )}
 
         {loading ? (
-          <div className="flex items-center justify-center">
-            <p>Loading.....</p>
+          <div className="flex items-center justify-center mt-7">
+            <p className="text-xs text-black dark:text-white">
+              Hold on while we handle your request...
+            </p>
           </div>
         ) : null}
       </div>

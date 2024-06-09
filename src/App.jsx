@@ -1,5 +1,8 @@
 import "react-alice-carousel/lib/alice-carousel.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
+import { LuLoader2 } from "react-icons/lu";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Security from "./pages/Security/Security";
@@ -27,8 +30,48 @@ import Withdrawal from "./pages/ClientPages/Withdrawal/Withdrawal";
 import Withdrawals from "./pages/AdminPages/Withdrawals/Withdrawals";
 import Profile from "./pages/Profile/Profile";
 
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalConfig = error.config;
+    if (error.response) {
+      if (error.response.status === 401 && !originalConfig?._retry) {
+        originalConfig._retry = true;
+        // call refresh token endpoint;
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_GENERAL_API_ENDPOINT}auth/refresh-token`,
+          {}
+        );
+        const { token } = data.data;
+        originalConfig.headers.Authorization = `Bearer ${token}`;
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        return axios(originalConfig);
+      }
+    }
+    // throw error;
+    return Promise.reject(error);
+  }
+);
+
 function App() {
-  const { user } = useAuth();
+  const { user, refetchUserOnRefresh, appLoading } = useAuth();
+  useEffect(() => {
+    // function to refetch user
+    refetchUserOnRefresh();
+  }, [refetchUserOnRefresh]);
+
+  if (appLoading) {
+    return (
+      <div className="w-screen h-screen bbg-slate-900 text-white flex items-center justify-center">
+        <div>
+          <LuLoader2 size={70} />
+          <p className="text-2xl font-montserrat">Loading application</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <BrowserRouter>
       <Routes>

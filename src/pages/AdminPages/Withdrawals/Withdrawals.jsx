@@ -36,9 +36,10 @@ function Withdrawals() {
       const { data } = await axios.patch(
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal/${id}`
       );
-      //edit the isPaid property of that particular withdrawal object
       setWithdrawals((prev) =>
-        prev._id === id ? { ...prev, isPaid: true } : prev
+        prev.map((entry) =>
+          entry._id === id ? { ...entry, isPaid: true } : entry
+        )
       );
       toast.success(data.message, toastifyConfig);
     } catch (error) {

@@ -65,7 +65,7 @@ function ChangeImageModal({ setShowImageModal, handleSubmit, loading }) {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <ToastContainer containerId="noImagePop" />
     </div>
   );
 }

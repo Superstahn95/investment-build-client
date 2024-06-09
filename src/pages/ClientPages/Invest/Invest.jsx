@@ -4,6 +4,7 @@ import PlanSelection from "../../../components/PlanSelection/PlanSelection";
 import PlanDetails from "../../../components/PlanDetails/PlanDetails";
 import toastifyConfig from "../../../utils/toastify";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../hooks/useAuth";
 
 function Invest() {
   const [plan, setPlan] = useState("");
@@ -11,6 +12,8 @@ function Invest() {
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { setUser, user } = useAuth();
+  console.log(user);
   const getPlans = useCallback(async () => {
     setLoading(true);
     try {
@@ -20,12 +23,8 @@ function Invest() {
           withCredentials: true,
         }
       );
-      console.log("we got the plans");
-      console.log(data);
       setPlans(data.plans);
     } catch (error) {
-      console.log("we got an error trying to get plans");
-      console.log(error);
       setError(true);
     } finally {
       setLoading(false);
@@ -42,7 +41,7 @@ function Invest() {
   }, [plans]);
 
   const handleInvestmentClick = async () => {
-    const planObject = { planId: plan, amount: investmentAmount };
+    const planObject = { planId: plan._id, amount: investmentAmount };
     // subscribe to plan logic here
     try {
       const { data } = await axios.patch(
@@ -52,6 +51,18 @@ function Invest() {
           withCredentials: true,
         }
       );
+      console.log("data returned after subscribing to plan");
+      console.log(data);
+      const newSub = { ...data.plan, plan };
+      setUser((prev) => ({
+        ...prev,
+        approvedBalance: prev.approvedBalance - parseInt(investmentAmount),
+        investedFundsAndReturns:
+          prev.investedFundsAndReturns + parseInt(investmentAmount),
+        subscriptions: Array.isArray(prev.subscriptions)
+          ? [...prev.subscriptions, newSub]
+          : [newSub],
+      }));
       toast.success(data.message, toastifyConfig);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -73,7 +84,7 @@ function Invest() {
       </h1>
       {loading && <div>Fetching plans....</div>}
       {plans && (
-        <div className="grid grid-cols-4 gap-2 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
+        <div className="grid  xl:grid-cols-4 gap-2 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
           <PlanSelection
             plans={plans}
             investmentAmount={investmentAmount}
@@ -82,7 +93,7 @@ function Invest() {
             setPlan={setPlan}
           />
 
-          <div className=" col-span-4 md:col-span-1  mt-5 text-gray-700  dark:text-white font-montserrat">
+          <div className=" col-span-4 xl:col-span-1  mt-5 text-gray-700  dark:text-white font-montserrat">
             <PlanDetails
               amount={investmentAmount}
               handleInvesmentClick={handleInvestmentClick}

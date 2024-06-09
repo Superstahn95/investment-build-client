@@ -7,7 +7,7 @@ const Sidebar = forwardRef(({ showNav, navigationLinks }, ref) => {
   return (
     <div
       ref={ref}
-      className="fixed w-56 h-full bg-white dark:bg-slate-900 shadow-md font-montserrat"
+      className="fixed w-56 h-full z-[99] bg-white dark:bg-slate-900 shadow-md font-montserrat"
     >
       <div className="flex flex-col pt-20">
         {navigationLinks.map((link) => (

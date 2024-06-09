@@ -86,7 +86,7 @@ function Profile() {
             loading={loading}
           />
         )}
-        <ToastContainer />
+        <ToastContainer containerId="profileToast" />
       </div>
     </>
   );
