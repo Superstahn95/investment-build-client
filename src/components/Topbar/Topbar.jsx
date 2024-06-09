@@ -40,10 +40,10 @@ function TopBar({ showNav, setShowNav }) {
         <div className="flex space-x-1  items-center pr-4 md:pr-16">
           <div className="flex items-center space-x-2">
             <button onClick={() => setTheme("light")}>
-              <SunIcon className="text-sky-600 h-8 w-8 dark:text-white" />
+              <SunIcon className="text-sky-600 w-4 h-4 md:h-8 md:w-8 dark:text-white" />
             </button>
             <button onClick={() => setTheme("dark")}>
-              <MoonIcon className="text-gray-700 h-8 w-8 dark:text-sky-600" />
+              <MoonIcon className="text-gray-700 w-4 h-4 md:h-8 md:w-8 dark:text-sky-600" />
             </button>
           </div>
           <Menu as="div" className="relative inline-block text-left">
@@ -52,7 +52,7 @@ function TopBar({ showNav, setShowNav }) {
                 <div>
                   <img
                     src={user?.profilePhoto ? user?.profilePhoto.url : altImage}
-                    className="w-8 h-8 rounded-full md:mr-4 border-2 border-white shadow-sm"
+                    className="w-4 h-4 md:w-8 md:h-8 rounded-full md:mr-4 border-2 border-white shadow-sm"
                     alt=""
                   />
                 </div>

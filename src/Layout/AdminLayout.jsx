@@ -44,7 +44,7 @@ const adminLinks = [
 function AdminLayout() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   function handleResize() {
     if (innerWidth <= 640) {
