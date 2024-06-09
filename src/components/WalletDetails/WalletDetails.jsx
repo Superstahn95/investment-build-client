@@ -21,7 +21,7 @@ function WalletDetails({
   };
 
   return (
-    <div className="col-span-4 md:col-span-3 py-3 px-5">
+    <div className="col-span-4 lg:col-span-3 py-3 px-5">
       <div className="w-full bg-red-300 rounded-2xl p-2 flex space-x-2 items-center font-montserrat">
         <div className="bg-red-500 text-white font-bold text-xs rounded-2xl px-2">
           Your payment method

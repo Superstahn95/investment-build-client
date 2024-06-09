@@ -21,12 +21,13 @@ function UserCurrentPlans() {
     );
   }
   return (
-    <div className=" grid  bg-white min-h-64 shadow-sm dark:bg-slate-800  mb-16 font-montserrat p-4">
-      <div className="flex flex-wrap items-center justify-center space-x-3">
+    <div className=" grid max-h-[600px] overflow-scroll bg-white min-h-64 shadow-sm dark:bg-slate-800  mb-16 font-montserrat p-4">
+      {/* <div className="flex flex-wrap items-center justify-center ml-3"> */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {user?.subscriptions.map((sub) => (
           <div
             key={sub._id}
-            className="flex-1 min-w-[300px] min-h-[200px] dark:text-white dark:bg-slate-900 bg-slate-200 "
+            className=" min-h-[200px] dark:text-white dark:bg-slate-900 bg-slate-200 "
           >
             {/* plan name */}
             <div className="flex space-x-3 items-center border-b border-slate-400 py-3">

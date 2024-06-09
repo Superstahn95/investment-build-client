@@ -5,11 +5,13 @@ import { ToastContainer, toast } from "react-toastify";
 import Table from "../../../components/Table/Table";
 import toastifyConfig from "../../../utils/toastify";
 import WithdrawalDetailsModal from "../../../components/WithdrawalDetailsModal/WithdrawalDetailsModal";
+import { LuLoader2 } from "react-icons/lu";
 
 function Withdrawals() {
   const [loading, setLoading] = useState(false);
   const [withdrawals, setWithdrawals] = useState(null);
   const [error, setError] = useState(false);
+  const [loadingRows, setLoadingRows] = useState({});
   //   const [showModal, setShowModal] = useState(false)
   const [modalDetails, setModalDetails] = useState(null);
 
@@ -32,6 +34,9 @@ function Withdrawals() {
   }, []);
 
   const handleWithdrawalApproval = async (id) => {
+    const newLoadingRows = { ...loadingRows };
+    newLoadingRows[id] = true;
+    setLoadingRows(newLoadingRows);
     try {
       const { data } = await axios.patch(
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal/${id}`
@@ -45,6 +50,9 @@ function Withdrawals() {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message, toastifyConfig);
+    } finally {
+      newLoadingRows[id] = false;
+      setLoadingRows(newLoadingRows);
     }
   };
   const handleModal = (details) => {
@@ -81,7 +89,14 @@ function Withdrawals() {
               row.isPaid ? "bg-slate-600" : "bg-blue-500"
             } text-white px-3 py-2 rounded-md`}
           >
-            {row.isPaid ? "Paid" : "Click as paid"}
+            {loadingRows[row._id] ? (
+              <LuLoader2 className="animate-spin" />
+            ) : row.isPaid ? (
+              "Paid"
+            ) : (
+              "Click as paid"
+            )}
+            {/* {row.isPaid ? "Paid" : "Click as paid"} */}
           </button>
           <button
             onClick={() => handleModal(row)}

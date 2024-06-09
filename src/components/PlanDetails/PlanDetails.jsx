@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
+import { LuLoader2 } from "react-icons/lu";
 
-function PlanDetails({ amount, handleInvesmentClick, plan }) {
+function PlanDetails({ amount, handleInvesmentClick, plan, loading }) {
   return (
     <div className="border border-gray-500 dark:border-white rounded-md p-3">
       <h2>Your investment details</h2>
@@ -71,7 +72,11 @@ function PlanDetails({ amount, handleInvesmentClick, plan }) {
           onClick={handleInvesmentClick}
           className="bg-red-400 text-white w-full px-2 py-3 rounded-r-md rounded-tl-md"
         >
-          Confirm & Invest
+          {loading ? (
+            <LuLoader2 className="animate-spin" />
+          ) : (
+            "Confirm & Invest"
+          )}
         </button>
       </div>
     </div>

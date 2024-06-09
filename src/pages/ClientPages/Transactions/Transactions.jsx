@@ -68,7 +68,7 @@ function Transactions() {
                   )
                 }
               >
-                Transactions
+                Withdrawal
               </Tab>
             </TabList>
             <TabPanels className="mt-4">

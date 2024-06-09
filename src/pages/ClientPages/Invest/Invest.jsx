@@ -11,6 +11,7 @@ function Invest() {
   const [plans, setPlans] = useState(null);
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [loading, setLoading] = useState(false);
+  const [investmentLoading, setInvestmentLoading] = useState(false);
   const [error, setError] = useState(false);
   const { setUser, user } = useAuth();
   console.log(user);
@@ -41,6 +42,7 @@ function Invest() {
   }, [plans]);
 
   const handleInvestmentClick = async () => {
+    setInvestmentLoading(true);
     const planObject = { planId: plan._id, amount: investmentAmount };
     // subscribe to plan logic here
     try {
@@ -51,8 +53,6 @@ function Invest() {
           withCredentials: true,
         }
       );
-      console.log("data returned after subscribing to plan");
-      console.log(data);
       const newSub = { ...data.plan, plan };
       setUser((prev) => ({
         ...prev,
@@ -66,6 +66,8 @@ function Invest() {
       toast.success(data.message, toastifyConfig);
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setInvestmentLoading(false);
     }
   };
   if (error) {
@@ -98,6 +100,7 @@ function Invest() {
               amount={investmentAmount}
               handleInvesmentClick={handleInvestmentClick}
               plan={plan}
+              loading={investmentLoading}
             />
           </div>
         </div>

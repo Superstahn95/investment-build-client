@@ -16,7 +16,7 @@ function Deposit() {
   const [selected, setSelected] = useState(paymentMethods[0]);
   const [loading, setLoading] = useState(false);
   const [showWalletDetails, setShowWalletDetails] = useState(false);
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const handleDeposit = async () => {
     setLoading(true);
     const formData = new FormData();
@@ -75,7 +75,7 @@ function Deposit() {
             setSelected={setSelected}
           />
         )}
-        <div className=" col-span-4 md:col-span-1  mt-5 text-gray-700  dark:text-white">
+        <div className=" col-span-4 lg:col-span-1  mt-5 text-gray-700  dark:text-white">
           <div className="border border-gray-500 dark:border-white rounded-md">
             <div className="flex  border-b border-gray-500 dark:border-white p-4">
               <p className="flex-1 font-semibold">Pending Deposits</p>

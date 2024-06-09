@@ -12,7 +12,7 @@ function DepositForm({
   setSelected,
 }) {
   return (
-    <div className="col-span-4 md:col-span-3 p-3">
+    <div className="col-span-4 lg:col-span-3 p-3">
       <h2 className="text-gray-700 text-xl mb-4 font-bold dark:text-white">
         Enter Amount
       </h2>
@@ -31,7 +31,7 @@ function DepositForm({
           </h2>
           <RadioGroup value={selected} onChange={setSelected}>
             <Label className=" sr-only">Payment method</Label>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid  sm:grid-cols-2 gap-4">
               {paymentMethods.map((method) => (
                 <Radio
                   key={method.name}
@@ -94,7 +94,7 @@ function DepositForm({
       <div className="my-4">
         <button
           onClick={proceedToPayment}
-          className="bg-red-400 text-white px-2 py-3 rounded-r-md rounded-tl-md"
+          className="bg-red-400 w-full text-white px-2 py-3 rounded-r-md rounded-tl-md"
         >
           Proceed to Payment
         </button>

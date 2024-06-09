@@ -87,11 +87,11 @@ function ClientDashboardHome() {
         Recent Transactions
       </h2>
       {/* transactions table to be dynamically rendered when i incorporate my backend */}
-      <div className="grid col-1 bg-white h-64 shadow-sm dark:bg-slate-800  p-4">
+      <div className="grid col-1 bg-white min-h-64 max-h-[400px] overflow-scroll shadow-sm dark:bg-slate-800  p-4">
         <div className="flex flex-col">
           <Link
             to="transactions"
-            className="self-end text-red-400 uppercase text-lg flex items-center space-x-2"
+            className="self-end text-sm text-red-400 uppercase  flex items-center space-x-2"
           >
             <ArrowTopRightOnSquareIcon className="h-4 w-4 text-red-400 " />
             View all transactions

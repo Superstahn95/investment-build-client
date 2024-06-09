@@ -12,8 +12,8 @@ function Withdrawal() {
       <h1 className="text-gray-700 text-3xl mb-16 font-bold dark:text-white font-montserrat">
         Place a withdrawal
       </h1>
-      <div className="grid grid-cols-4 gap-2 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
-        <div className="col-span-4 md:col-span-3 py-3 px-5">
+      <div className="grid grid-cols-4 gap-2 p-2 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
+        <div className="col-span-4 lg:col-span-3 py-3 lg:px-5">
           <div className="bg-red-100 py-3 font-bold text-xl">
             Current Withdrawable Balance : ${user?.withdrawableFunds}
           </div>

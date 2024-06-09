@@ -28,7 +28,18 @@ function UserTransactions() {
 
   const columns = [
     { name: "Date", selector: (row) => row.createdAt },
-    { name: "Type", selector: (row) => row.type },
+    {
+      name: "Type",
+      selector: (row) => (
+        <div
+          className={`${
+            row.type === "deposit" ? "text-red-500" : "text-green-500"
+          }`}
+        >
+          {row.type}{" "}
+        </div>
+      ),
+    },
     { name: "Amount", selector: (row) => row.amount },
   ];
 

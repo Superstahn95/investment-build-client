@@ -28,7 +28,7 @@ function TopBar({ showNav, setShowNav }) {
 
   return (
     <div
-      className={`fixed bg-gray-200 dark:bg-slate-900  w-full h-16 flex justify-between items-center transition-all duruation-[400ms] ${
+      className={`fixed bg-gray-200 dark:bg-slate-900  w-full h-16 flex justify-between items-center transition-all z-[55] duruation-[400ms] ${
         showNav ? "pl-56" : ""
       }`}
     >

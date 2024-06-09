@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 function WithdrawalInstruction({ network }) {
   return (
-    <div className=" col-span-4 md:col-span-1  mt-5 text-gray-700  dark:text-white">
+    <div className=" col-span-4 lg:col-span-1  mt-5 text-gray-700  dark:text-white">
       <div className="border border-gray-500 dark:border-white rounded-md">
         <div className="flex  border-b border-gray-500 dark:border-white p-4">
           Instruction
