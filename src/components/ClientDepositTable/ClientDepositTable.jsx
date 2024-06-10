@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import dateFormat from "dateformat";
 import Table from "../Table/Table";
 
 function ClientDepositTable({ allDeposits, loading }) {
@@ -23,7 +24,7 @@ function ClientDepositTable({ allDeposits, loading }) {
     },
     {
       name: "Date Created",
-      selector: (row) => row.createdAt,
+      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
       sortable: true,
     },
   ];

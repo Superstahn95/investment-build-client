@@ -121,16 +121,21 @@ function User() {
         <UserDetails
           balance={user?.approvedBalance}
           invFunds={user?.investedFundsAndReturns}
-          profit={user?.investedFundsAndReturns - user?.totalDeposit}
+          totalDeposit={user?.totalDeposit}
+          withdrawal={user?.totalWithdrawal}
+          plans={
+            Array.isArray(user?.subscriptions) ? user?.subscriptions.length : 0
+          }
         />
 
         {/* user information */}
         <UserInfo
           email={user?.email}
           name={user?.name}
-          number={user?.number}
+          number={user?.phoneNumber}
           registered={user?.createdAt}
-          username={user?.username}
+          isAuthorized={user?.isAuthorized}
+          isRestricted={user?.isRestrictedFromWithdrawal}
         />
       </div>
       {showModal && <FundingModal closeModal={closeModal} id={user?._id} />}

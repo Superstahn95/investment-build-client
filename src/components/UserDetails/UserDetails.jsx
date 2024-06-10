@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 //make this component a little bit more dynamic
-function UserDetails({ balance, profit, invFunds, plans }) {
+function UserDetails({ balance, totalDeposit, withdrawal, plans }) {
   return (
     <div className="grid grid-cols-3 gap-5 border border-black/40 dark:border-white my-4 p-4 text-gray-600 dark:text-white font-montserrat">
       <div>
@@ -9,12 +9,12 @@ function UserDetails({ balance, profit, invFunds, plans }) {
         <p>${balance}</p>
       </div>
       <div>
-        <p>Profit</p>
-        <p>${profit}</p>
+        <p>Deposits</p>
+        <p>${totalDeposit}</p>
       </div>
       <div>
-        <p>Inv. Funds and Returns</p>
-        <p>${invFunds}</p>
+        <p>Withdrawal</p>
+        <p>${withdrawal}</p>
       </div>
       <div>
         <p>Inv. Plans</p>

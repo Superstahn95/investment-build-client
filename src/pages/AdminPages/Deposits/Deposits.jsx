@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import dateFormat from "dateformat";
 import { TrashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import Table from "../../../components/Table/Table";
 import DepositImageModal from "../../../components/DepositImageModal/DepositImageModal";
@@ -48,7 +49,7 @@ function Deposits() {
     },
     {
       name: "Date Deposited",
-      selector: (row) => row.createdAt,
+      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
     },
     {
       name: "Action",

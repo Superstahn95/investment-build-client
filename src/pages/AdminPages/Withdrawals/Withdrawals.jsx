@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
+import dateFormat from "dateformat";
 import Table from "../../../components/Table/Table";
 import toastifyConfig from "../../../utils/toastify";
 import WithdrawalDetailsModal from "../../../components/WithdrawalDetailsModal/WithdrawalDetailsModal";
@@ -77,7 +78,7 @@ function Withdrawals() {
     },
     {
       name: "Request Date",
-      selector: (row) => row.createdAt,
+      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
     },
     {
       name: "Action",

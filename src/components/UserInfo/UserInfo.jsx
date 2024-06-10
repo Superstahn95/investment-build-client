@@ -1,12 +1,33 @@
 /* eslint-disable react/prop-types */
-function UserInfo({ name, email, number, username, registered }) {
+import dateFormat from "dateformat";
+function UserInfo({
+  name,
+  email,
+  number,
+  registered,
+  isAuthorized,
+  isRestricted,
+}) {
   const userInfo = [
     { header: "Name", value: name },
     { header: "Email Address", value: email },
     { header: "Mobile Number", value: number },
-    { header: "Username", value: username },
-    { header: "Registered", value: registered },
+    {
+      header: "Authorized",
+      value: isAuthorized ? "Granted Access" : "Access denied",
+    },
+    {
+      header: "Withdrawal Restricted",
+      value: isRestricted ? "Withdrawal Locked" : "Withdrawal Unlocked",
+    },
+    { header: "Register Date", value: dateFormat(registered, "mediumDate") },
   ];
+  // email={user?.email}
+  // name={user?.name}
+  // number={user?.phoneNumber}
+  // registered={user?.createdAt}
+  // isAuthorized ={user.isAuthorized}
+  // isRestricted = {user.isRestrictedFromWithdrawal}
   return (
     <div className="mb-7 font-montserrat">
       <h2 className="text-gray-700 uppercase  text-xl dark:text-white mt-7">

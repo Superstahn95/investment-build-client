@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import dateFormat from "dateformat";
 import Table from "../Table/Table";
-function UserTransactions() {
+import dateFormat from "dateformat";
+function AllTransactions() {
   const [transactions, setTransactions] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ function UserTransactions() {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}transaction`,
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}transaction/all`,
         {
           withCredentials: true,
         }
@@ -28,10 +28,7 @@ function UserTransactions() {
   }, []);
 
   const columns = [
-    {
-      name: "Date",
-      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
-    },
+    { name: "Name", selector: (row) => row.user.name },
     {
       name: "Type",
       selector: (row) => (
@@ -45,6 +42,10 @@ function UserTransactions() {
       ),
     },
     { name: "Amount", selector: (row) => row.amount },
+    {
+      name: "Date",
+      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
+    },
   ];
 
   //make a separate error display component
@@ -58,8 +59,8 @@ function UserTransactions() {
   }
   if (transactions && transactions.length < 1) {
     return (
-      <div className="w-full flex items-center justify-center dark:bg-slate-800 bg-slate-200 dark:text-white font-montserrat text-2xl">
-        You have no approved transactions at the moment
+      <div className="w-full flex items-center justify-center dark:bg-slate-800  dark:text-white font-montserrat text-2xl">
+        There are currently no approved transactions in your platform
       </div>
     );
   }
@@ -74,4 +75,4 @@ function UserTransactions() {
   );
 }
 
-export default UserTransactions;
+export default AllTransactions;

@@ -73,7 +73,7 @@ function DepositImageModal({ id, setShowImage, allDeposits, setDeposits }) {
   //we need the id here
   //so the
   return (
-    <div className="fixed w-full h-full top-0 left-0 bg-black/40 font-montserrat  flex justify-center  text-red-500">
+    <div className="fixed z-[99] w-full h-full top-0 left-0 bg-black/40 font-montserrat  flex justify-center  text-red-500">
       <div className="bg-white h-fit w-[90%]  sm:w-[500px]  p-4 rounded-md dark:bg-slate-800 ">
         <div className="border-b border-gray-400 flex items-center justify-between">
           <h2 className="text-gray-700 text-xl pb-2 font-bold dark:text-white">

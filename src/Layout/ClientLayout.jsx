@@ -35,6 +35,7 @@ function ClientLayout() {
     }
   }, [navigate, user]);
   useEffect(() => {
+    handleResize();
     if (typeof window != undefined) {
       addEventListener("resize", handleResize);
     }

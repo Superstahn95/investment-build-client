@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import axios from "axios";
+import dateFormat from "dateformat";
 import Table from "../Table/Table";
 
 function ClientWithdrawalTable() {
@@ -45,7 +46,7 @@ function ClientWithdrawalTable() {
     },
     {
       name: "Date Created",
-      selector: (row) => row.createdAt,
+      selector: (row) => dateFormat(row.createdAt, "mediumDate"),
       sortable: true,
     },
   ];
