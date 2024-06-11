@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ContentWrapper from "../ContentWrapper/ContentWrapper";
+import { Link } from "react-router-dom";
 import {
   ArrowDownTrayIcon,
   LockClosedIcon,
@@ -10,8 +10,10 @@ import {
   BanknotesIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/solid";
+import ContentWrapper from "../ContentWrapper/ContentWrapper";
 import AllTransactions from "../AllTransactions/AllTransactions";
-import { Link } from "react-router-dom";
+import Refetch from "../Refetch/Refetch";
+
 function AdminDashboardHome() {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -24,6 +26,7 @@ function AdminDashboardHome() {
     paidWithdrawal: "",
   });
   const getDashboardStats = async () => {
+    setIsError(false);
     setLoading(true);
     try {
       const { data } = await axios.get(
@@ -42,7 +45,6 @@ function AdminDashboardHome() {
         paidWithdrawal: data.paidWithdrawal,
       }));
     } catch (error) {
-      console.log(error);
       setIsError(true);
     } finally {
       setLoading(false);
@@ -56,10 +58,10 @@ function AdminDashboardHome() {
   //handle error ui return properly
   if (isError) {
     return (
-      <div>
-        <h2>Unable to fetch details at the moment.</h2>{" "}
-        <button onClick={getDashboardStats}>Click to retry</button>{" "}
-      </div>
+      <Refetch
+        handleRetry={getDashboardStats}
+        text="We were unable to get platform statistics."
+      />
     );
   }
   return (

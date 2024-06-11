@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { LuLoader2 } from "react-icons/lu";
 import { ToastContainer, toast } from "react-toastify";
 import { PlusIcon } from "@heroicons/react/24/solid";
 // import PlanCard from "../../../components/Plans/PlanCard";
 import PlanCard from "../../../components/PlanCard/PlanCard";
 import toastifyConfig from "../../../utils/toastify";
-import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../../../components/Refetch/Refetch";
 
 function Plans() {
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState(null);
+  const [error, setError] = useState(false);
   const [loadingRows, setLoadingRows] = useState({});
 
   const handleDelete = async (id) => {
@@ -31,6 +33,7 @@ function Plans() {
     }
   };
   const getPlans = async () => {
+    setError(false);
     setLoading(true);
     try {
       const { data } = await axios.get(
@@ -41,7 +44,7 @@ function Plans() {
       );
       setPlans(data.plans);
     } catch (error) {
-      console.log(error);
+      setError(true);
       // do something with the error
     } finally {
       setLoading(false);
@@ -51,8 +54,15 @@ function Plans() {
   useEffect(() => {
     getPlans();
   }, []);
-  console.log(plans);
 
+  if (error) {
+    return (
+      <Refetch
+        handleRetry={getPlans}
+        text="We were unable to get the plans at the moment"
+      />
+    );
+  }
   return (
     <>
       <h1 className="text-gray-700 text-3xl mb-5 font-bold dark:text-white font-montserrat">

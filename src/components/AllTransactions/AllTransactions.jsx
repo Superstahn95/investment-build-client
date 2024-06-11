@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../Table/Table";
 import dateFormat from "dateformat";
+import Refetch from "../Refetch/Refetch";
 function AllTransactions() {
   const [transactions, setTransactions] = useState(null);
   const [error, setError] = useState(false);
@@ -51,10 +52,10 @@ function AllTransactions() {
   //make a separate error display component
   if (error) {
     return (
-      <div>
-        <p> Unable to fetch transactions right now</p>{" "}
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        handleRetry={getTransactionHistory}
+        text="We are unable to get users transactions at the moment"
+      />
     );
   }
   if (transactions && transactions.length < 1) {

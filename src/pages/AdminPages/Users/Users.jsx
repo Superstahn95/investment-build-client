@@ -5,6 +5,7 @@ import { LuLoader2 } from "react-icons/lu";
 import Table from "../../../components/Table/Table";
 import { ToastContainer, toast } from "react-toastify";
 import toastifyConfig from "../../../utils/toastify";
+import Refetch from "../../../components/Refetch/Refetch";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,7 @@ function Users() {
     withdrawalStatus: {},
   });
   const getUsers = async () => {
+    setError(false);
     setIsLoading(true);
     try {
       const { data } = await axios.get(
@@ -144,9 +146,10 @@ function Users() {
   }, []);
   if (error) {
     return (
-      <div>
-        <p>Something went wrong</p> <button onClick={getUsers}>Retry</button>
-      </div>
+      <Refetch
+        handleRetry={getUsers}
+        text="Unable to get users at the moment"
+      />
     );
   }
   return (

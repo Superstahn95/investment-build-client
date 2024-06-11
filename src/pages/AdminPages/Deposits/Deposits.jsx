@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import dateFormat from "dateformat";
+import { LuLoader2 } from "react-icons/lu";
 import { TrashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import Table from "../../../components/Table/Table";
 import DepositImageModal from "../../../components/DepositImageModal/DepositImageModal";
-import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../../../components/Refetch/Refetch";
 
 function Deposits() {
   //a useEffect hook to get all deposits
@@ -14,6 +15,7 @@ function Deposits() {
   const [error, setError] = useState(false);
 
   const getDeposits = useCallback(async () => {
+    setError(false);
     setLoading(true);
     try {
       const { data } = await axios.get(
@@ -76,10 +78,10 @@ function Deposits() {
 
   if (error) {
     return (
-      <div>
-        <p>Something went wrong trying to fetch deposits</p>
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        handleRetry={getDeposits}
+        text="We were unable to get users deposits"
+      />
     );
   }
   return (

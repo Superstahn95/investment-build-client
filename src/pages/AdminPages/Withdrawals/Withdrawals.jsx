@@ -7,6 +7,7 @@ import Table from "../../../components/Table/Table";
 import toastifyConfig from "../../../utils/toastify";
 import WithdrawalDetailsModal from "../../../components/WithdrawalDetailsModal/WithdrawalDetailsModal";
 import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../../../components/Refetch/Refetch";
 
 function Withdrawals() {
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ function Withdrawals() {
   const [modalDetails, setModalDetails] = useState(null);
 
   const getWidthdrawals = useCallback(async () => {
+    setError(false);
     setLoading(true);
     try {
       const { data } = await axios.get(
@@ -116,10 +118,10 @@ function Withdrawals() {
 
   if (error) {
     return (
-      <div>
-        <p>Something went wrong trying to fetch withdrawal requests</p>
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        handleRetry={getWidthdrawals}
+        text="We were unable to get the withdrawals"
+      />
     );
   }
   return (

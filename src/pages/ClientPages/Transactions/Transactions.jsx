@@ -43,7 +43,6 @@ function Transactions() {
       );
       setWithdrawals(data.withdrawals);
     } catch (error) {
-      console.log(error);
       setWithdrawalError(true);
     } finally {
       setWithdrawalLoading(false);

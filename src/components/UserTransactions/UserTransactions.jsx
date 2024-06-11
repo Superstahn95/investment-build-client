@@ -3,11 +3,13 @@ import axios from "axios";
 import { LuLoader2 } from "react-icons/lu";
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
+import Refetch from "../Refetch/Refetch";
 function UserTransactions() {
   const [transactions, setTransactions] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const getTransactionHistory = async () => {
+    setError(false);
     setLoading(true);
     try {
       const { data } = await axios.get(
@@ -51,10 +53,10 @@ function UserTransactions() {
   //make a separate error display component
   if (error) {
     return (
-      <div>
-        <p> Unable to fetch transactions right now</p>{" "}
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        text={"we were unable to get your transactions"}
+        handleRetry={getTransactionHistory}
+      />
     );
   }
   if (transactions && transactions.length < 1) {

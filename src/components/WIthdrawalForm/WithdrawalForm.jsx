@@ -17,8 +17,17 @@ function WithdrawalForm({ network }) {
   };
   const handleWithdrawalRequest = async (details) => {
     setLoading(true);
+    if (!details.amount) {
+      return toast.error(
+        "Amount entered is greater than withdrawable balance",
+        toastifyConfig
+      );
+    }
     if (details.amount > user?.withdrawableFunds) {
-      return toast.error("Amount entered is greater than withdrawable balance");
+      return toast.error(
+        "Amount entered is greater than withdrawable balance",
+        toastifyConfig
+      );
     }
     try {
       const { data } = await axios.post(

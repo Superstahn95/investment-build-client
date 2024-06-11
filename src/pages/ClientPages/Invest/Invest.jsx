@@ -6,6 +6,7 @@ import toastifyConfig from "../../../utils/toastify";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../hooks/useAuth";
 import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../../../components/Refetch/Refetch";
 
 function Invest() {
   const [plan, setPlan] = useState("");
@@ -73,10 +74,7 @@ function Invest() {
   };
   if (error) {
     return (
-      <div>
-        <p>Something went wrong</p>
-        <button>Click to retry</button>
-      </div>
+      <Refetch handleRetry={getPlans} text="We were unable to get the plans" />
     );
   }
 
