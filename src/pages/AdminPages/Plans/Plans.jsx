@@ -1,16 +1,33 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { PlusIcon } from "@heroicons/react/24/solid";
 // import PlanCard from "../../../components/Plans/PlanCard";
 import PlanCard from "../../../components/PlanCard/PlanCard";
+import toastifyConfig from "../../../utils/toastify";
 
 function Plans() {
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState(null);
+  const [loadingRows, setLoadingRows] = useState({});
 
-  const handleDelete = (id) => {
-    console.log(`deleting plan with ${id}`);
+  const handleDelete = async (id) => {
+    const newLoadingRows = { ...loadingRows };
+    newLoadingRows[id] = true;
+    setLoadingRows(newLoadingRows);
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}plan/${id}`
+      );
+      setPlans((prev) => prev.filter((p) => p._id !== id));
+      toast.success(data.message, toastifyConfig);
+    } catch (error) {
+      toast.error(error.response.data.message, toastifyConfig);
+    } finally {
+      newLoadingRows[id] = false;
+      setLoadingRows(newLoadingRows);
+    }
   };
   const getPlans = async () => {
     setLoading(true);
@@ -55,10 +72,16 @@ function Plans() {
           <div>Skeleton loader component</div>
         ) : (
           plans?.map((plan) => (
-            <PlanCard key={plan._id} plan={plan} handleDelete={handleDelete} />
+            <PlanCard
+              key={plan._id}
+              plan={plan}
+              handleDelete={handleDelete}
+              loading={loadingRows[plan._id]}
+            />
           ))
         )}
       </div>
+      <ToastContainer />
     </>
   );
 }

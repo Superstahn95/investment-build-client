@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { LuLoader2 } from "react-icons/lu";
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
 function UserTransactions() {
@@ -64,7 +65,13 @@ function UserTransactions() {
     );
   }
   return loading ? (
-    <div>Skeleton component for fetchind deposits</div>
+    <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+      <LuLoader2
+        size={35}
+        className="text-slate-900 dark:text-white animate-spin"
+      />
+      <p className="text-sm dark:text-white">Fetching transactions...</p>
+    </div>
   ) : transactions ? (
     <div className="grid col-1 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
       <Table tableHeaders={columns} tableDetails={transactions} />

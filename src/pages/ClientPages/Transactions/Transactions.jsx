@@ -11,7 +11,11 @@ function classNames(...classes) {
 
 function Transactions() {
   const [deposits, setDeposits] = useState(null);
+  const [withdrawals, setWithdrawals] = useState(null);
   const [depositLoading, setDepositLoading] = useState(false);
+  const [withdrawalLoading, setWithdrawalLoading] = useState(false);
+  const [depositError, setDepositError] = useState(false);
+  const [withdrawalError, setWithdrawalError] = useState(false);
   const getDepositHistory = async () => {
     setDepositLoading(true);
     try {
@@ -23,20 +27,37 @@ function Transactions() {
       );
       setDeposits(data.deposits);
     } catch (error) {
-      console.log(error);
+      setDepositError(true);
     } finally {
       setDepositLoading(false);
+    }
+  };
+  const getWithdrawalHistory = async () => {
+    setWithdrawalLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal/mywithdrawals`,
+        {
+          withCredentials: true,
+        }
+      );
+      setWithdrawals(data.withdrawals);
+    } catch (error) {
+      console.log(error);
+      setWithdrawalError(true);
+    } finally {
+      setWithdrawalLoading(false);
     }
   };
 
   useEffect(() => {
     getDepositHistory();
+    getWithdrawalHistory();
   }, []);
   //the goal is to have a deposit and withdrawal tab
   //the deposit tab should contain a deposits table and the withdrawal tab should contain a withdrawal table
-
   return (
-    <div>
+    <div className="font-montserrat">
       <h1 className="text-gray-700 text-3xl mb-16 font-bold dark:text-white font-montserrat">
         Transaction Records
       </h1>
@@ -73,15 +94,18 @@ function Transactions() {
             </TabList>
             <TabPanels className="mt-4">
               <TabPanel>
-                {deposits && (
-                  <ClientDepositTable
-                    allDeposits={deposits}
-                    loading={depositLoading}
-                  />
-                )}
+                <ClientDepositTable
+                  allDeposits={deposits}
+                  loading={depositLoading}
+                  error={depositError}
+                />
               </TabPanel>
               <TabPanel>
-                <ClientWithdrawalTable />
+                <ClientWithdrawalTable
+                  withdrawals={withdrawals}
+                  loading={withdrawalLoading}
+                  error={withdrawalError}
+                />
               </TabPanel>
             </TabPanels>
           </TabGroup>

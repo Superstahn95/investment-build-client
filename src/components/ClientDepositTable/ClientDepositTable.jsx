@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
+import { LuLoader2 } from "react-icons/lu";
 
-function ClientDepositTable({ allDeposits, loading }) {
+function ClientDepositTable({ allDeposits, loading, error }) {
   //   const [deposit, setDeposit] = useState(userDepositHistory);
   // i should be firing off a useEffect hook here to fetch the data
 
@@ -28,13 +29,29 @@ function ClientDepositTable({ allDeposits, loading }) {
       sortable: true,
     },
   ];
+  if (error) {
+    return (
+      <div>
+        <p>Unable to get withdrawal history</p>
+        <button>Click to retry</button>
+      </div>
+    );
+  }
   //handle loader properly
   return (
     <>
       {loading ? (
-        <div>Hold on while we fetch your history</div>
+        <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching deposits...</p>
+        </div>
       ) : (
-        <Table tableHeaders={columns} tableDetails={allDeposits} />
+        allDeposits && (
+          <Table tableHeaders={columns} tableDetails={allDeposits} />
+        )
       )}
     </>
   );

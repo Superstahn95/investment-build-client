@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import PlanForm from "../../../components/PlanForm/PlanForm";
 import { toast, ToastContainer } from "react-toastify";
 import toastifyConfig from "../../../utils/toastify";
+import { LuLoader2 } from "react-icons/lu";
 
 function UpdatePlan() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ function UpdatePlan() {
   const [updateLoading, setUpdateLoading] = useState(false);
   const [error, setError] = useState(false);
   const [plan, setPlan] = useState(null);
+  const navigate = useNavigate();
 
   const getPlan = useCallback(async () => {
     setLoading(true);
@@ -47,6 +49,7 @@ function UpdatePlan() {
         }
       );
       toast.success(data.message, toastifyConfig);
+      navigate("/dashboard/plans");
     } catch (error) {
       toast.error(error.response.data.message, toastifyConfig);
     } finally {
@@ -78,8 +81,12 @@ function UpdatePlan() {
         </Link>
       </div>
       {loading && (
-        <div className="shadow-md bg-white dark:bg-slate-800 p-4">
-          Fetching plan details...
+        <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching plan details...</p>
         </div>
       )}
       <div className="shadow-md bg-white dark:bg-slate-800 p-4">

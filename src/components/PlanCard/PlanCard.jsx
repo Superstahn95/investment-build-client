@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { LuLoader2 } from "react-icons/lu";
 
-function PlanCard({ plan, handleDelete }) {
+function PlanCard({ plan, handleDelete, loading }) {
   const {
     _id,
     name,
     minimumPrice,
     maximumPrice,
-    topUpInterval,
+    topUpAmount,
     duration,
     giftBonus,
   } = plan;
@@ -34,8 +35,8 @@ function PlanCard({ plan, handleDelete }) {
       </div>
 
       <div className="flex items-center justify-between mb-2">
-        <p>Top up interval</p>
-        <p className="capitalize">{topUpInterval}</p>
+        <p>Top up percentage</p>
+        <p className="capitalize">{topUpAmount}%</p>
       </div>
       <div className="flex items-center justify-between mb-2">
         <p>Gift Bonus</p>
@@ -53,12 +54,16 @@ function PlanCard({ plan, handleDelete }) {
         >
           <PencilIcon className="h-4 w-4 text-white" />
         </Link>
-        <Link
+        <button
           onClick={handleClick}
           className="rounded-r-md rounded-tl-md p-3 font-bold bg-red-500"
         >
-          <XMarkIcon className="h-4 w-4 text-white " />
-        </Link>
+          {loading ? (
+            <LuLoader2 className="animate-spin text-white" />
+          ) : (
+            <XMarkIcon className="h-4 w-4 text-white " />
+          )}
+        </button>
       </div>
     </div>
   );

@@ -1,33 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
-import axios from "axios";
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
+import { LuLoader2 } from "react-icons/lu";
 
-function ClientWithdrawalTable() {
-  const [loading, setLoading] = useState(false);
-  const [withdrawals, setWithdrawals] = useState(null);
-  const [error, setError] = useState(false);
-
-  const getWithdrawalHistory = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}withdrawal/mywithdrawals`,
-        {
-          withCredentials: true,
-        }
-      );
-      setWithdrawals(data.withdrawals);
-    } catch (error) {
-      console.log(error);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    getWithdrawalHistory();
-  }, []);
+function ClientWithdrawalTable({ withdrawals, loading, error }) {
   const columns = [
     { name: "Amount", selector: (row) => `$${row.amount}`, sortable: true },
     { name: "Submitted address", selector: (row) => row.address },
@@ -62,11 +38,15 @@ function ClientWithdrawalTable() {
   return (
     <>
       {loading ? (
-        <div>Hold on while we fetch your history</div>
+        <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching withdrawals...</p>
+        </div>
       ) : (
-        withdrawals && (
-          <Table tableHeaders={columns} tableDetails={withdrawals} />
-        )
+        <Table tableHeaders={columns} tableDetails={withdrawals} />
       )}
     </>
   );
