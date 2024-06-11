@@ -85,7 +85,10 @@ function Deposit() {
               </div>
             </div>
             <div className="p-4 ">
-              <Link className="text-sm text-gray-500" to={""}>
+              <Link
+                to="/dashboard/transactions"
+                className="text-sm text-gray-500"
+              >
                 View deposit history
               </Link>
             </div>

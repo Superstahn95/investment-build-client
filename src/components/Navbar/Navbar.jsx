@@ -3,12 +3,14 @@ import { NavLink } from "react-router-dom";
 // import { LuLoader2 } from "react-icons/lu";
 import { FaBitcoin } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
+import { LuLoader2 } from "react-icons/lu";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NotificationPopup from "../NotificationPopup/NotificationPopup";
+import { useAuth } from "../../hooks/useAuth";
 
 function Navbar() {
   const [isOpen, setisOpen] = useState(false);
-  const user = false;
+  const { user, logout, logoutLoading } = useAuth();
   const links = [
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
@@ -69,10 +71,15 @@ bg-slate-900 text-white"
           ))}
           {user ? (
             <button
+              onClick={logout}
               type="button"
               className="text-white bg-red-400 border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
             >
-              Logout
+              {logoutLoading ? (
+                <LuLoader2 className="animate-spin" />
+              ) : (
+                "Logout"
+              )}
             </button>
           ) : (
             <NavLink
@@ -80,6 +87,14 @@ bg-slate-900 text-white"
               className="text-white bg-transparent border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
             >
               Login
+            </NavLink>
+          )}
+          {user && (
+            <NavLink
+              to="dashboard"
+              className="text-white bg-red-400 font-bold border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
+            >
+              Dashboard
             </NavLink>
           )}
         </ul>

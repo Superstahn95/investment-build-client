@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/solid";
+import { MdOutlineDone } from "react-icons/md";
+
 function WalletDetails({
   loading,
   selected,
@@ -8,13 +11,13 @@ function WalletDetails({
   setReceipt,
   handleDeposit,
 }) {
-  const copyWalletAddress = async () => {
-    try {
-      await navigator.clipboard.writeText(selected.walletAddress);
-      alert("copied to clipboard");
-    } catch (error) {
-      alert("unable to copy to clipb");
-    }
+  const [copy, setCopy] = useState(false);
+  const copyWalletAddress = () => {
+    setCopy(true);
+    navigator.clipboard.writeText(selected.walletAddress);
+    setTimeout(() => {
+      setCopy(false);
+    }, 3000);
   };
   const handleFileChange = (e) => {
     setReceipt(e.target.files[0]);
@@ -46,19 +49,23 @@ function WalletDetails({
           <p className="font-montserrat text-xl text-gray-700  dark:text-white capitalize font-bold">
             {selected.name} address:
           </p>
-          <div className="relative border border-gray-500 dark:border-white rounded-md ">
+          <div className="relative bg-white flex items-center border border-gray-500 dark:border-white rounded-md ">
             <input
               readOnly
               type="text"
-              className="w-full border-none outline-none p-3 text-gray-500"
+              className=" border-none flex-1 outline-none p-3 text-gray-500"
               value={selected.walletAddress}
             />
-            <div
-              onClick={copyWalletAddress}
-              className="absolute top-1/2 right-5 -translate-y-1/2 cursor-pointer"
-            >
-              <ClipboardDocumentIcon className="w-7 h-7" />
-            </div>
+            {!copy ? (
+              <button onClick={copyWalletAddress} className=" cursor-pointer">
+                <ClipboardDocumentIcon className="w-7 h-7" />
+              </button>
+            ) : (
+              <div className="flex items-center space-x-1 cursor-pointer ">
+                <MdOutlineDone size={20} />
+                <span className="text-xs">Copied</span>
+              </div>
+            )}
           </div>
           <span className="font-montserrat uppercase text-gray-500">
             <span className="font-semibold capitalize"> Network type : </span>

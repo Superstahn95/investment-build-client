@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useAuth } from "../../hooks/useAuth";
 function PlanSelection({
   plans,
   setPlan,
   investmentAmount,
   setInvestmentAmount,
 }) {
+  const { user } = useAuth();
   const quickAmounts = [300, 500, 1000, 1500, 2000];
   const handleClick = (number) => {
     setInvestmentAmount(number);
@@ -67,7 +69,7 @@ function PlanSelection({
                 type="text"
                 readOnly
                 className="border border-gray-500 outline-none rounded-md w-full p-2 dark:text-white dark:bg-slate-900 dark:border-white"
-                value="Account Balance"
+                value={`Account Balance:   $${user?.approvedBalance}`}
               />
             </div>
           </div>
