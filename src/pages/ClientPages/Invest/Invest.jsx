@@ -5,6 +5,7 @@ import PlanDetails from "../../../components/PlanDetails/PlanDetails";
 import toastifyConfig from "../../../utils/toastify";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../hooks/useAuth";
+import { LuLoader2 } from "react-icons/lu";
 
 function Invest() {
   const [plan, setPlan] = useState("");
@@ -84,7 +85,15 @@ function Invest() {
       <h1 className="text-gray-700 text-3xl mb-16 font-bold dark:text-white font-montserrat">
         Get started with your investment
       </h1>
-      {loading && <div>Fetching plans....</div>}
+      {loading && (
+        <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Getting plan details...</p>
+        </div>
+      )}
       {plans && (
         <div className="grid  xl:grid-cols-4 gap-2 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
           <PlanSelection

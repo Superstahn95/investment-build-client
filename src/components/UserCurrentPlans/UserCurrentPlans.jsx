@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import dateFormat from "dateformat";
 function UserCurrentPlans() {
   const { user } = useAuth();
   // subscriptions
@@ -27,20 +28,20 @@ function UserCurrentPlans() {
         {user?.subscriptions.map((sub) => (
           <div
             key={sub._id}
-            className=" min-h-[200px] dark:text-white dark:bg-slate-900 bg-slate-200 "
+            className=" min-h-[200px] p-2 rounded-md dark:text-white dark:bg-slate-900 bg-slate-200 "
           >
             {/* plan name */}
-            <div className="flex space-x-3 items-center border-b border-slate-400 py-3">
+            <div className="flex space-x-3 items-center border-b text-xs md:text-sm border-slate-400 py-3">
               <span>Name:</span>
               <span>{sub.plan.name}</span>
             </div>
-            <div className="flex space-x-3 items-center border-b border-slate-400 py-3">
+            <div className="flex text-xs md:text-sm space-x-3 items-center border-b border-slate-400 py-3">
               <span>Cost:</span>
-              <span>{sub.cost}</span>
+              <span className="text-red-400">{sub.cost}</span>
             </div>
-            <div className="flex space-x-3 items-center border-b border-slate-400 py-3">
+            <div className="flex text-xs md:text-sm space-x-3 items-center border-b border-slate-400 py-3">
               <span>Start Date:</span>
-              <span>{sub.startDate}</span>
+              <span>{dateFormat(sub.startDate, "mediumDate")}</span>
             </div>
           </div>
         ))}

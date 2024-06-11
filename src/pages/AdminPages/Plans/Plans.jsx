@@ -6,6 +6,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 // import PlanCard from "../../../components/Plans/PlanCard";
 import PlanCard from "../../../components/PlanCard/PlanCard";
 import toastifyConfig from "../../../utils/toastify";
+import { LuLoader2 } from "react-icons/lu";
 
 function Plans() {
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,13 @@ function Plans() {
       {/* plans div */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
-          <div>Skeleton loader component</div>
+          <div className="w-full h-full flex flex-col  col-span-3 items-center justify-center font-montserrat">
+            <LuLoader2
+              size={35}
+              className="text-slate-900 dark:text-white animate-spin"
+            />
+            <p className="text-sm dark:text-white">Fetching plans...</p>
+          </div>
         ) : (
           plans?.map((plan) => (
             <PlanCard

@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 import { TrashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import Table from "../../../components/Table/Table";
 import DepositImageModal from "../../../components/DepositImageModal/DepositImageModal";
+import { LuLoader2 } from "react-icons/lu";
 
 function Deposits() {
   //a useEffect hook to get all deposits
@@ -87,7 +88,13 @@ function Deposits() {
         Manage Client Deposits
       </h1>
       {loading ? (
-        <div>Skeleton component for fetchind deposits</div>
+        <div className="w-full h-full flex flex-col  items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching deposits...</p>
+        </div>
       ) : deposits ? (
         <div className="grid col-1 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
           <Table tableHeaders={columns} tableDetails={deposits} />

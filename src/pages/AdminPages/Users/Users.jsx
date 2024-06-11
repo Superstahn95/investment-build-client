@@ -21,7 +21,7 @@ function Users() {
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}users`
       );
       console.log(data);
-      setUsers(data.users);
+      setUsers(data.users.filter((user) => user.role !== "admin"));
     } catch (error) {
       console.log(error);
       setError(true);
@@ -48,16 +48,12 @@ function Users() {
             : user
         )
       );
-      console.log("new user state");
-      console.log(users);
       toast.success(data.message, toastifyConfig);
       //edit the users state
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message, toastifyConfig);
     } finally {
       newLoadingRows.withdrawalStatus[id] = false;
-      // delete[id] = false;
     }
   };
   const authorizeUser = async (id) => {
@@ -161,7 +157,13 @@ function Users() {
         Platform Users
       </p>
       {isLoading ? (
-        <div> Loading.... </div>
+        <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching users...</p>
+        </div>
       ) : users ? (
         <div className="grid col-1 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
           <Table tableHeaders={columns} tableDetails={users} />

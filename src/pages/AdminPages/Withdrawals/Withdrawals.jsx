@@ -128,7 +128,13 @@ function Withdrawals() {
         Manage Client Withdrawal Requests
       </h1>
       {loading ? (
-        <div>Skeleton component for fetching withdrawals</div>
+        <div className="w-full h-full flex flex-col  items-center justify-center font-montserrat">
+          <LuLoader2
+            size={35}
+            className="text-slate-900 dark:text-white animate-spin"
+          />
+          <p className="text-sm dark:text-white">Fetching withdrawals...</p>
+        </div>
       ) : withdrawals ? (
         <div className="grid col-1 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
           <Table tableHeaders={columns} tableDetails={withdrawals} />
