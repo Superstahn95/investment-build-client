@@ -13,6 +13,7 @@ import {
 import ContentWrapper from "../ContentWrapper/ContentWrapper";
 import AllTransactions from "../AllTransactions/AllTransactions";
 import Refetch from "../Refetch/Refetch";
+import ContentWrapperSkeleton from "../Skeleton/ContentWrapperSkeleton";
 
 function AdminDashboardHome() {
   const [loading, setLoading] = useState(false);
@@ -71,9 +72,9 @@ function AdminDashboardHome() {
       </h1>
       {loading ? (
         <div className="grid lg:grid-cols-3 gap-5 mb-16">
-          <div>Skeleton component</div>
-          <div>Skeleton component</div>
-          <div>Skeleton component</div>
+          {[1, 2, 3].map((i) => (
+            <ContentWrapperSkeleton key={i} />
+          ))}
         </div>
       ) : (
         <div className="grid lg:grid-cols-3 gap-5 mb-16">
