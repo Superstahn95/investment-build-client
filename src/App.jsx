@@ -66,8 +66,9 @@ function App() {
     return (
       <div className="w-screen h-screen bg-slate-900 text-white flex items-center justify-center">
         <div>
-          <LuLoader2 size={70} />
-          <p className="text-2xl font-montserrat">Loading application</p>
+          <LuLoader2 size={50} className="text-white animate-spin" />
+          <p className="text-xl font-montserrat">Loading appliation</p>
+          <p className="text-sm font-montserrat">Please wait.....</p>
         </div>
       </div>
     );

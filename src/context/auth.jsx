@@ -65,7 +65,8 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      axios.defaults.headers.common.Authorization = data.token;
+      //bug
+      axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
       setUser(data.user);
     } catch (error) {
       console.log(error);
