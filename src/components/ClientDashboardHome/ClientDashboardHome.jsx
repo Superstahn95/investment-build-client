@@ -13,9 +13,6 @@ import UserCurrentPlans from "../UserCurrentPlans/UserCurrentPlans";
 import UserTransactions from "../UserTransactions/UserTransactions";
 
 function ClientDashboardHome() {
-  //   const { user, isSuccess, isLoading, isError, message } = useSelector(
-  //     (state) => state.auth
-  //   );
   const { user } = useAuth();
   const widgets = [
     {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Hero.css";
 function Hero() {
   return (
@@ -15,9 +16,12 @@ function Hero() {
               market, we can manage your investments.
             </p>
             <div className="py-3  flex flex-col items-center">
-              <button className="bg-red-400 font-bold py-3 px-4 rounded uppercase">
+              <Link
+                to="register"
+                className="bg-red-400 font-bold py-3 px-4 rounded uppercase"
+              >
                 Register
-              </button>
+              </Link>
               <p className="text-xl font-bold mt-4">
                 Register now | Earn in a few days
               </p>

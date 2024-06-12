@@ -15,7 +15,7 @@ function Navbar() {
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
     { name: "Investments", link: "/investments" },
-    { name: "Faq", link: "/faq" },
+    // { name: "Faq", link: "/faq" },
     { name: "security", link: "/security" },
     // { name: "About", link: "/about" },
     // { name: "Store locations", link: "/locations" },
