@@ -64,7 +64,7 @@ function App() {
 
   if (appLoading) {
     return (
-      <div className="w-screen h-screen bbg-slate-900 text-white flex items-center justify-center">
+      <div className="w-screen h-screen bg-slate-900 text-white flex items-center justify-center">
         <div>
           <LuLoader2 size={70} />
           <p className="text-2xl font-montserrat">Loading application</p>

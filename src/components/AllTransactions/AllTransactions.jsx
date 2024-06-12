@@ -3,6 +3,7 @@ import axios from "axios";
 import Table from "../Table/Table";
 import dateFormat from "dateformat";
 import Refetch from "../Refetch/Refetch";
+import { LuLoader2 } from "react-icons/lu";
 function AllTransactions() {
   const [transactions, setTransactions] = useState(null);
   const [error, setError] = useState(false);
@@ -66,7 +67,13 @@ function AllTransactions() {
     );
   }
   return loading ? (
-    <div>Skeleton component for fetchind deposits</div>
+    <div className="w-full h-full flex flex-col items-center justify-center font-montserrat">
+      <LuLoader2
+        size={35}
+        className="text-slate-900 dark:text-white animate-spin"
+      />
+      <p className="text-sm dark:text-white">Fetching transactions...</p>
+    </div>
   ) : transactions ? (
     <div className="grid col-1 bg-white shadow-sm dark:bg-slate-800 font-montserrat">
       <Table tableHeaders={columns} tableDetails={transactions} />
