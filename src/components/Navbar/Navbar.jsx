@@ -70,31 +70,31 @@ bg-slate-900 text-white"
             </li>
           ))}
           {user ? (
-            <button
-              onClick={logout}
-              type="button"
-              className="text-white bg-red-400 border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
-            >
-              {logoutLoading ? (
-                <LuLoader2 className="animate-spin" />
-              ) : (
-                "Logout"
-              )}
-            </button>
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row">
+              <NavLink
+                to="dashboard"
+                className="text-white flex items-center justify-center w-[150px] bg-transparent border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
+              >
+                Dashboard
+              </NavLink>
+              <button
+                onClick={logout}
+                type="button"
+                className="text-white w-[150px] items-center justify-center bg-red-400 border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
+              >
+                {logoutLoading ? (
+                  <LuLoader2 className="animate-spin" />
+                ) : (
+                  "Logout"
+                )}
+              </button>
+            </div>
           ) : (
             <NavLink
               to="/login"
               className="text-white bg-transparent border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
             >
               Login
-            </NavLink>
-          )}
-          {user && (
-            <NavLink
-              to="dashboard"
-              className="text-white bg-red-400 font-bold border border-red-400  py-1 px-3 md:ml-8 rounded md:static"
-            >
-              Dashboard
             </NavLink>
           )}
         </ul>

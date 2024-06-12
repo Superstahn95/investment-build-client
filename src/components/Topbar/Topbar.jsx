@@ -5,8 +5,7 @@ import {
   UserIcon,
   ChevronDownIcon,
   CreditCardIcon,
-  SunIcon,
-  MoonIcon,
+  HomeIcon,
 } from "@heroicons/react/24/solid";
 import { LuLoader2 } from "react-icons/lu";
 import {
@@ -17,11 +16,10 @@ import {
   MenuItem,
 } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../hooks/useTheme";
 import { useAuth } from "../../hooks/useAuth";
+import ThemeToggleButton from "../ThemeToggleButton/ThemeToggleButton";
 
 function TopBar({ showNav, setShowNav }) {
-  const { setTheme } = useTheme();
   const { user, logoutLoading, logout } = useAuth();
   const altImage =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -37,15 +35,8 @@ function TopBar({ showNav, setShowNav }) {
           className="h-8 w-8 text-gray-700 cursor-pointer dark:text-white"
           onClick={() => setShowNav(!showNav)}
         />
-        <div className="flex space-x-1  items-center pr-4 md:pr-16">
-          <div className="flex items-center space-x-2">
-            <button onClick={() => setTheme("light")}>
-              <SunIcon className="text-sky-600 w-4 h-4 md:h-8 md:w-8 dark:text-white" />
-            </button>
-            <button onClick={() => setTheme("dark")}>
-              <MoonIcon className="text-gray-700 w-4 h-4 md:h-8 md:w-8 dark:text-sky-600" />
-            </button>
-          </div>
+        <div className="flex space-x-2  items-center pr-4 md:pr-16">
+          <ThemeToggleButton />
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <MenuButton className="inline-flex w-full justify-center items-center">
@@ -97,6 +88,15 @@ function TopBar({ showNav, setShowNav }) {
                         </div>
                       )}
                     </button>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to="/"
+                      className="flex hover:bg-red-400 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                    >
+                      <HomeIcon className="h-4 w-4 mr-2" />
+                      Go to home
+                    </Link>
                   </MenuItem>
                 </div>
               </MenuItems>
