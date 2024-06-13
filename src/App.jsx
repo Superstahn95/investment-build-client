@@ -65,7 +65,7 @@ function App() {
   if (appLoading) {
     return (
       <div className="w-screen h-screen bg-slate-900 text-white flex items-center justify-center">
-        <div>
+        <div className="flex flex-col items-center justify-center">
           <LuLoader2 size={50} className="text-white animate-spin" />
           <p className="text-xl font-montserrat">Loading appliation</p>
           <p className="text-sm font-montserrat">Please wait.....</p>
