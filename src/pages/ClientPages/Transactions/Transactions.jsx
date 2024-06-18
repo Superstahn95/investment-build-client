@@ -97,6 +97,7 @@ function Transactions() {
                   allDeposits={deposits}
                   loading={depositLoading}
                   error={depositError}
+                  refetch={getDepositHistory}
                 />
               </TabPanel>
               <TabPanel>
@@ -104,6 +105,7 @@ function Transactions() {
                   withdrawals={withdrawals}
                   loading={withdrawalLoading}
                   error={withdrawalError}
+                  refetch={getWithdrawalHistory}
                 />
               </TabPanel>
             </TabPanels>

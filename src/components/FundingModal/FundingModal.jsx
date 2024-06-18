@@ -33,7 +33,6 @@ function FundingModal({ id, closeModal }) {
       );
       toast.success(data.message, toastifyConfig);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message, toastifyConfig);
     } finally {
       setLoading(false);
@@ -61,12 +60,6 @@ function FundingModal({ id, closeModal }) {
             action: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
-            console.log(id);
-            console.log({
-              ...values,
-              amount: parseInt(values.amount),
-              id,
-            });
             creditOrDebitUser({
               ...values,
               amount: parseInt(values.amount),

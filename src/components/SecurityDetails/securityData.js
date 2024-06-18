@@ -37,6 +37,6 @@ export const data = [
   {
     question: "Our dedicated security team is always working for you",
     answer:
-      "We have a dedicated in-house security team that works full-time to keep you safe. The team regularly reviews new code to minimize the potential for security issues, monitors our various tools and systems, and stays on top of industry trends and events. Keeping your account safe is our top priority, and we hope that gives you peace of mind. If you receive an email from our platform that you believe may be fraudulent, please forward the message to our Fraud Prevention Team: fraud@universalcapitals.org. To report potential security vulnerabilities, please email: security@universalcapitals.org For any other customer support, please contact our support team .",
+      "We have a dedicated in-house security team that works full-time to keep you safe. The team regularly reviews new code to minimize the potential for security issues, monitors our various tools and systems, and stays on top of industry trends and events. Keeping your account safe is our top priority, and we hope that gives you peace of mind. If you receive an email from our platform that you believe may be fraudulent, please forward the message to our Fraud Prevention Team: fraud@blackrockminefx.com. To report potential security vulnerabilities, please email: security@blackrockminefx.com For any other customer support, please contact our support team .",
   },
 ];

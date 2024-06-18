@@ -25,14 +25,14 @@ function GotYou() {
             <div className="ms-4">
               <span>&quot;</span>
               <p className="text-sm md:text-lg">
-                At miningExchangefx.com, we take resposibility for
+                At Blackrockminefx.com, we take resposibility for
                 investor&apos;s success and portfolio performance
               </p>
               <span className="text-red-400">Founder</span>
             </div>
           </div>
           <p className="text-sm md:text-lg">
-            universalcapitalfx.com builds and manages portfolios tailored to the
+            Blackrockminefx.com builds and manages portfolios tailored to the
             investor&apos;s financial needs, and deploys technology with
             expertise to ensure these finanical goals are met.
           </p>

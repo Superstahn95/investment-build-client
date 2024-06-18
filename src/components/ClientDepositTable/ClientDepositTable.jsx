@@ -2,8 +2,9 @@
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
 import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../Refetch/Refetch";
 
-function ClientDepositTable({ allDeposits, loading, error }) {
+function ClientDepositTable({ allDeposits, loading, error, refetch }) {
   //   const [deposit, setDeposit] = useState(userDepositHistory);
   // i should be firing off a useEffect hook here to fetch the data
 
@@ -31,10 +32,10 @@ function ClientDepositTable({ allDeposits, loading, error }) {
   ];
   if (error) {
     return (
-      <div>
-        <p>Unable to get withdrawal history</p>
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        text="Unable to get your deposit history at the moment"
+        handleRetry={refetch}
+      />
     );
   }
   //handle loader properly

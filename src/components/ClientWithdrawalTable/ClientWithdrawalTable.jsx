@@ -2,8 +2,9 @@
 import dateFormat from "dateformat";
 import Table from "../Table/Table";
 import { LuLoader2 } from "react-icons/lu";
+import Refetch from "../Refetch/Refetch";
 
-function ClientWithdrawalTable({ withdrawals, loading, error }) {
+function ClientWithdrawalTable({ withdrawals, loading, error, refetch }) {
   const columns = [
     { name: "Amount", selector: (row) => `$${row.amount}`, sortable: true },
     { name: "Submitted address", selector: (row) => row.address },
@@ -28,10 +29,10 @@ function ClientWithdrawalTable({ withdrawals, loading, error }) {
   ];
   if (error) {
     return (
-      <div>
-        <p>Unable to get withdrawal history</p>
-        <button>Click to retry</button>
-      </div>
+      <Refetch
+        text="Unable to get your withdrawal history at the moment"
+        handleRetry={refetch}
+      />
     );
   }
   //handle loader properly

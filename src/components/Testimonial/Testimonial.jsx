@@ -12,13 +12,13 @@ const testimonies = [
     name: "April May",
     position: "share holder",
     statement:
-      "Investing is neccessary! Working for a paycheck all your life is no good especially at retirement. This realization led me to seek out ways to increase my savings and that's when i found Mining Exchange. Payouts are amazingly fast and easy",
+      "My husband and I have tried a couple of investment companies in the past, but none could really keep up to their promise. This was until i heard about blackrockminefx and decided to give it a try. My life has entirely changed for the better",
   },
   {
     name: "George Roberts",
     position: "investor",
     statement:
-      "Investing is neccessary! Working for a paycheck all your life is no good especially at retirement. This realization led me to seek out ways to increase my savings and that's when i found Mining Exchange. Payouts are amazingly fast and easy",
+      "I am an independent student today all thanks to blackrockmine. They are really experts in the trading sector and it has really been a blast placing trust in these wonderful group of people",
   },
 ];
 function Testimonial() {

@@ -32,24 +32,3 @@ function Home() {
 }
 
 export default Home;
-{
-  /* <div className="card flex flex-col items-center border-solid border-2 border-white rounded p-4">
-<div>
-  <img src={forexImg} alt="" className="min-w-full" />
-</div>
-<div>
-  <h2 className="font-bold text-2xl py-3">Forex/Crypto Plan</h2>
-</div>
-<hr />
-<div className="py-4">
-  <p className="text-lg">Min: $1000|Max: $10000000</p>{" "}
-</div>
-
-<div className="py-4">
-  <p> ROI: 5% | Days: 7 days</p>
-</div>
-<div className="py-4">
-  <p> Daily Rate: 0.71%</p>
-</div>
-</div> */
-}

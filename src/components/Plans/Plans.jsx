@@ -10,12 +10,19 @@ function Plans() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const getPlans = async () => {
+    setError(false);
     setLoading(true);
     try {
-      const { data } = await axios.get(`${import.meta.env}plan`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_GENERAL_API_ENDPOINT}plan`,
+        {
+          withCredentials: true,
+        }
+      );
       setPlans(data.plans);
     } catch (error) {
       setError(true);
+      // do something with the error
     } finally {
       setLoading(false);
     }
@@ -45,7 +52,7 @@ function Plans() {
           </div>
         ) : (
           <div className="grid w-full md:w-[80%] p-4 lg:grid-cols-3 gap-8">
-            {plans.map((plan) => (
+            {plans?.map((plan) => (
               <PlanCard key={plan.name} plan={plan} />
             ))}
           </div>

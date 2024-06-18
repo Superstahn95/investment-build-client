@@ -15,7 +15,6 @@ function ChangeImageModal({ setShowImageModal, handleSubmit, loading }) {
     const formData = new FormData();
     formData.append("profilePhoto", image);
     // function for submitting data
-    console.log("about editing the user profile picture");
     handleSubmit(formData);
   };
 

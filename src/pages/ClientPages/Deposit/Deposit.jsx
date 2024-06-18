@@ -36,7 +36,6 @@ function Deposit() {
         pendingDeposit: parseInt(data.amountDeposited) + prev.pendingDeposit,
       }));
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message || "error", toastifyConfig);
     } finally {
       setLoading(false);

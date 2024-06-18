@@ -8,7 +8,7 @@ function PlanCard({ plan }) {
         {plan.name}
       </div>
       <div className="bg-gray-200 relative flex flex-col space-y-4 py-7 items-center justify-center">
-        <span className="text-gray-500">{plan?.topUpAmount * 7}%</span>
+        <span className="text-gray-500">{plan?.topUpAmount * 7}% weekly</span>
         <span className="font-bold text-black">ROI</span>
         <div className="absolute w-[50px] h-[50px] flex items-center justify-center rounded-full bg-red-400 right-1/2 bottom-0 translate-x-1/2 translate-y-1/2">
           <BsBriefcase className="text-white" />

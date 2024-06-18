@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
 import {
   createContext,
   useState,
@@ -7,7 +8,7 @@ import {
   useCallback,
 } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+import toastifyConfig from "../utils/toastify";
 
 export const AuthContext = createContext(null);
 
@@ -16,6 +17,7 @@ function AuthProvider({ children }) {
   const [error, setError] = useState(null);
   const [loginLoading, setLoginLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
+  const [registerSuccessMessage, setRegisterSuccessMessage] = useState(null);
   const [logoutLoading, setLogoutLoading] = useState(false);
   const [appLoading, setAppLoading] = useState(false);
   const registerUser = useCallback(async (userDetails) => {
@@ -28,9 +30,8 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-      setUser(data.user);
       setRegisterLoading(false);
+      setRegisterSuccessMessage(data.message);
     } catch (err) {
       setError(err.response.data.message);
       setRegisterLoading(false);
@@ -52,7 +53,6 @@ function AuthProvider({ children }) {
       setLoginLoading(false);
     } catch (err) {
       setLoginLoading(false);
-      console.log(err);
       setError(err.response.data.message);
     }
   }, []);
@@ -69,8 +69,7 @@ function AuthProvider({ children }) {
       axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
       setUser(data.user);
     } catch (error) {
-      console.log(error);
-      setError(error.response.data.message);
+      return;
     } finally {
       setAppLoading(false);
     }
@@ -85,11 +84,9 @@ function AuthProvider({ children }) {
           withCredentials: true,
         }
       );
-      console.log(data.message);
       setUser(null);
       setLogoutLoading(false);
     } catch (error) {
-      console.log(error);
       setLogoutLoading(false);
     }
   }, []);
@@ -102,6 +99,8 @@ function AuthProvider({ children }) {
       registerLoading,
       logoutLoading,
       appLoading,
+      registerSuccessMessage,
+      setRegisterSuccessMessage,
       setError,
       setUser,
       loginUser,
@@ -116,8 +115,10 @@ function AuthProvider({ children }) {
       registerLoading,
       logoutLoading,
       appLoading,
+      registerSuccessMessage,
       setUser,
       setError,
+      setRegisterSuccessMessage,
       loginUser,
       registerUser,
       logout,
@@ -139,6 +140,12 @@ function AuthProvider({ children }) {
       setError(null);
     }
   }, [error]);
+  useEffect(() => {
+    if (registerSuccessMessage) {
+      toast.success(registerSuccessMessage, toastifyConfig);
+    }
+    // setRegisterSuccessMessage(null);
+  }, [registerSuccessMessage]);
   return (
     <AuthContext.Provider value={authContextValue}>
       <ToastContainer />

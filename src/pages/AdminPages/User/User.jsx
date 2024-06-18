@@ -15,7 +15,6 @@ import FundingModal from "../../../components/FundingModal/FundingModal";
 function User() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(loading);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(false);
   const { id } = useParams();
@@ -31,7 +30,6 @@ function User() {
       );
       setUser(data.user);
     } catch (error) {
-      console.log(error);
       setError(true);
     } finally {
       setLoading(false);

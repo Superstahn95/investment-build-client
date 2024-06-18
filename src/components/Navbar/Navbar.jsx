@@ -35,7 +35,7 @@ bg-slate-900 text-white"
           className="flex text-2xl cursor-pointer items-center gap-2 w-fit"
         >
           <FaBitcoin className="w-7 h-7 text-red-400" />
-          <span className="font-bold text-sm md:text-xl">MiningEx</span>
+          <span className="font-bold text-sm md:text-xl">Blackrockminefx</span>
         </NavLink>
 
         {/* menu icon */}

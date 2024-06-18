@@ -16,7 +16,6 @@ function Invest() {
   const [investmentLoading, setInvestmentLoading] = useState(false);
   const [error, setError] = useState(false);
   const { setUser, user } = useAuth();
-  console.log(user);
   const getPlans = useCallback(async () => {
     setLoading(true);
     try {

@@ -31,7 +31,6 @@ function Profile() {
       toast.success("Your details has been updated", toastifyConfig);
       setUser(data.user);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
@@ -50,7 +49,6 @@ function Profile() {
       );
       toast.success(data.message, toastifyConfig);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);

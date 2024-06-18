@@ -7,17 +7,16 @@ function Intro() {
         {/* text div */}
         <div>
           <h2 className="font-bold text-slate-900 text-lg text-center md:text-xl 2xl:text-4xl mb-7">
-            About Miningexchange.com
+            About Blackrockminefx.com
           </h2>
           <p className="mb-5">
-            universalcapitalfx.com is an investment company offering
+            blackrockminefx.com is an investment company offering
             blockchain-based assets such as cryptocurrencies, as well as Forex,
             Stocks, and Exchange Traded Funds to its clients, who include
-            individual, group, and institutional investors.
-            universalcapitalfx.com is licensed to trade digital assets to
-            clients in over 147 countries around the world. Our offered assets
-            bring high returns for our clients, who have trusted us for over 6
-            years now.
+            individual, group, and institutional investors. blackrockminefx.com
+            is licensed to trade digital assets to clients in over 147 countries
+            around the world. Our offered assets bring high returns for our
+            clients, who have trusted us for over 6 years now.
           </p>
           <p className="mb-5">
             As a company, we are committed to ensuring our clients are satisfied

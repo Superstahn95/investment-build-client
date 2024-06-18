@@ -10,12 +10,22 @@ import { useAuth } from "../../hooks/useAuth";
 
 function Register() {
   const navigate = useNavigate();
-  const { registerUser, registerLoading, user } = useAuth();
+  const {
+    registerUser,
+    registerLoading,
+    user,
+    registerSuccessMessage,
+    setRegisterSuccessMessage,
+  } = useAuth();
   useEffect(() => {
+    if (registerSuccessMessage) {
+      navigate("/login");
+      return setRegisterSuccessMessage(null);
+    }
     if (user) {
       navigate("/dashboard");
     }
-  }, [user, navigate]);
+  }, [user, navigate, registerSuccessMessage, setRegisterSuccessMessage]);
 
   const initialData = {
     name: "",
@@ -98,12 +108,18 @@ function Register() {
                   Sign in
                 </Link>
               </p>
+              <p className="text-xs text-gray-700 font-montserrat">
+                Go back to{" "}
+                <Link to="/" className="text-red-400 font-bold">
+                  home
+                </Link>
+              </p>
               <div className="my-2">
                 <button
                   type="submit"
                   className={`${
                     registerLoading ? "bg-gray-500" : "bg-red-400"
-                  }  text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer`}
+                  }  text-white px-2 py-3 rounded-r-md rounded-tl-md w-full cursor-pointer flex items-center  justify-center`}
                   disabled={registerLoading}
                 >
                   {registerLoading ? (

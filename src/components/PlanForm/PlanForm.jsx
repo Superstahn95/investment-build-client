@@ -19,7 +19,6 @@ function PlanForm({ initialData, onSubmit, loading }) {
         duration: Yup.number().required("Required"),
       })}
       onSubmit={(values) => {
-        console.log("about submitting.....");
         onSubmit(values);
       }}
     >

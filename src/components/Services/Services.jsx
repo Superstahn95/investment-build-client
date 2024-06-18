@@ -33,7 +33,7 @@ function Services() {
   return (
     <div className="font-montserrat flex flex-col items-center mt-7">
       <h3 className="text-red-400  text-xs md:text-lg">
-        Welcome To MiningExchange
+        Welcome To Blackrockminefx
       </h3>
       <h2 className="font-bold text-xl md:text-6xl">What we do</h2>
       {/* little line */}

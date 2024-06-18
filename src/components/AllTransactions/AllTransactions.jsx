@@ -19,7 +19,6 @@ function AllTransactions() {
       );
       setTransactions(data.transactions);
     } catch (error) {
-      console.log(error);
       setError(true);
     } finally {
       setLoading(false);

@@ -64,6 +64,12 @@ function Login() {
                   Sign up
                 </Link>
               </p>
+              <p className="text-xs text-gray-700 font-montserrat">
+                Go back to{" "}
+                <Link to="/" className="text-red-400 font-bold">
+                  home
+                </Link>
+              </p>
               <div className="my-2">
                 <button
                   disabled={loginLoading}

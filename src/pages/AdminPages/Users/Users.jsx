@@ -22,10 +22,8 @@ function Users() {
       const { data } = await axios.get(
         `${import.meta.env.VITE_GENERAL_API_ENDPOINT}users`
       );
-      console.log(data);
       setUsers(data.users.filter((user) => user.role !== "admin"));
     } catch (error) {
-      console.log(error);
       setError(true);
       toast.error(error.response.data.message || "error", toastifyConfig);
     } finally {
@@ -78,7 +76,6 @@ function Users() {
       );
       toast.success(data.message, toastifyConfig);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message, toastifyConfig);
     } finally {
       newLoadingRows.authorize[id] = false;

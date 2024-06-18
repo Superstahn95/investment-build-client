@@ -10,7 +10,6 @@ function CreatePlan() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (formData) => {
-    console.log("form has been submitted", formData);
     setLoading(true);
     try {
       const { data } = await axios.post(

@@ -29,7 +29,6 @@ function Withdrawals() {
       );
       setWithdrawals(data.withdrawals);
     } catch (error) {
-      console.log(error);
       setError(true);
     } finally {
       setLoading(false);
@@ -51,7 +50,6 @@ function Withdrawals() {
       );
       toast.success(data.message, toastifyConfig);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message, toastifyConfig);
     } finally {
       newLoadingRows[id] = false;
